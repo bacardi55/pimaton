@@ -19,14 +19,14 @@ class PimatonCam:
         logger.debug('Instanciating PimatonCam with config %s' % config)
         self.config = config
 
-    def take_pictures(self):
+    def take_pictures(self, unique_key):
 	"""
 	This function takes picture via the pi camera
 	"""
         logger.debug("Starting taking picture")
         taken_pictures = []
         for i in range(self.config['number_of_pictures_to_take']):  
-            filename = self.config['picture_prefix_name'] + "_" + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ".jpg"
+            filename = self.config['picture_prefix_name'] + "_" + unique_key + '_' + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ".jpg"
             taken_pictures.append(filename)
 
             sleep(self.config['time_between_pictures'])

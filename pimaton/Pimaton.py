@@ -1,5 +1,5 @@
 from PimatonCam import PimatonCam 
-from time import sleep, strftime
+from time import time, sleep, strftime
 import datetime
 import logging
 
@@ -26,7 +26,8 @@ class Pimaton:
         while True:
             # TODO v0.0.2 : Manage button to start taking picture.
             logger.debug('In Loop')
-	    taken_pictures = pimatoncam.take_pictures()
+            unique_key = str(int(time()))
+	    taken_pictures = pimatoncam.take_pictures(unique_key)
 
             if len(taken_pictures) != self.config['picamera']['number_of_pictures_to_take']:
                 logger.warning("The number of taken pictures is incorrect")
@@ -34,7 +35,7 @@ class Pimaton:
                 return False
 
             # TODO v0.0.1 : Manage exception.
-            filename = self.config['picamera']['generated_prefix_name'] + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ".jpg"
+            filename = self.config['picamera']['generated_prefix_name'] + '_' + unique_key + '_' + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ".jpg"
             to_print = PimatonImage().render_image_to_print(taken_pictures, self.config['picamera']['photo_directory'], filename)
 
             # TODO v0.0.3 : Manage print.
