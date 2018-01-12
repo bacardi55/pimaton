@@ -7,6 +7,7 @@ import logging
 from PimatonCam import PimatonCam
 from PimatonImage import PimatonImage
 from PimatonExceptions import PimatonExceptions
+from PimatonInput import PimatonInput, PimatonInputKeyboard
 
 logging.basicConfig()
 logger = logging.getLogger("Pimaton")
@@ -24,6 +25,7 @@ class Pimaton:
         # Init classes now so it checks the config early.
         self.pimatoncam = PimatonCam(self.config['picamera'])
         self.pimatonimage = PimatonImage(self.config['image'])
+        self.pimatoninput = self.init_input(self.config['input'])
 
     def run(self):
         """
@@ -33,6 +35,9 @@ class Pimaton:
         while True:
             # TODO v0.0.2 : Manage button to start taking picture.
             unique_key = str(int(time()))
+
+            if self.pimatoninput.is_triggered() is False:
+	        continue
 
             try:
                 taken_pictures = self.pimatoncam.take_pictures(unique_key)
@@ -46,7 +51,7 @@ class Pimaton:
                 raise PimatonExceptions(
                     'The number of taken pictures isnt right.')
 
-            filename = self.config['picamera']['generated_prefix_name'] + '_' + unique_key + \
+            filename = self.config['image']['print_pic']['generated_prefix_name'] + '_' + unique_key + \
                 '_' + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ".jpg"
 
             try:
@@ -98,6 +103,17 @@ class Pimaton:
 
         return fpp
 
+    def init_input(self, config):
+        if self.config['input']['type'] == 'keyboard':
+            pimatoninput = PimatonInputKeyboard()
+
+        elif self.config['input']['type'] == 'GPIO':
+	    # TODO v0.0.2
+            pimatoninput = PimatonInputGPIO()
+        else:
+            raise PimatonExceptions('Not recognized input type % s' % self.config['input']['type'])
+
+        return pimatoninput
 
 class PimatonExceptions:
     pass

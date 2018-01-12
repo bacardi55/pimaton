@@ -7,6 +7,7 @@ from time import sleep
 from .Pimaton import Pimaton
 from .PimatonCam import PimatonCam
 from .PimatonImage import PimatonImage
+from .PimatonInput import PimatonInput
 from .PimatonExceptions import PimatonExceptions, PimatonImageExceptions, PimatonCamExceptions
 from .Singleton import Singleton
 from ._version import version_str
