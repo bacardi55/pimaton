@@ -33,34 +33,35 @@ class Pimaton:
             # TODO v0.0.2 : Manage button to start taking picture.
             unique_key = str(int(time()))
 
-	    try:
+            try:
                 taken_pictures = self.pimatoncam.take_pictures(unique_key)
             except (PimatonCamExceptions, PiCameraError) as e:
-	        logger.error('An error occured when taking pictures: %s' % e)
-		raise PimatonExceptions("An error occured when taking picture")
+                logger.error('An error occured when taking pictures: %s' % e)
+                raise PimatonExceptions("An error occured when taking picture")
 
             if len(
                     taken_pictures) != self.config['picamera']['number_of_pictures_to_take']:
                 logger.error("The number of taken pictures is incorrect")
-                raise PimatonExceptions('The number of taken pictures isnt right.')
+                raise PimatonExceptions(
+                    'The number of taken pictures isnt right.')
 
             filename = self.config['picamera']['generated_prefix_name'] + '_' + unique_key + \
                 '_' + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ".jpg"
 
-	    try:
+            try:
                 to_print = self.pimatonimage.render_image_to_print(
                     self.__get_fullpath_thumbnails_list(taken_pictures),
                     filename,
                     self.config['image'])
             except PimatonExceptions as e:
-	        logger.error('PimatonImageExceptions: %s' % e)
-	        raise PimatonExceptions('Couldnt generate the picture to print')
+                logger.error('PimatonImageExceptions: %s' % e)
+                raise PimatonExceptions(
+                    'Couldnt generate the picture to print')
 
             # TODO v0.0.3 : Manage print.
-	    # try:
+            # try:
                 # pimatonprint = PimatonPrint()
-	    # except PimatonPrintExceptions as e:
-       
+            # except PimatonPrintExceptions as e:
 
             logger.debug('Sleeping %s second' %
                          self.config['pimaton']['time_between_loop'])
@@ -76,7 +77,7 @@ class Pimaton:
                 'No given config, loading default one %s' %
                 config_file)
         else:
-	    logger.debug('No template given, loading default one')
+            logger.debug('No template given, loading default one')
 
         # Overriding all config, so be sure when not using default one :).
         self.config = self.load_config(config_file)

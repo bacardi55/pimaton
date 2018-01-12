@@ -38,17 +38,21 @@ class PimatonImage(with_metaclass(Singleton, object)):
             im.thumbnail(self.dimensions['thumbnail_size'])
             thumbnails.append(im)
 
-        if config['print_pic']['template'] is not None or len(config['print_pic']['template']) == 0:
+        if config['print_pic']['template'] is not None or len(
+                config['print_pic']['template']) == 0:
             logger.debug(
                 "Loading template file: %s" %
                 config['print_pic']['template'])
             if os.path.exists(config['print_pic']['template']) is False:
-	        logger.warning('Template file given doesnt exists, creating empty image')
-                generated = self.__create_new_image(self.dimensions['print_pic_size'])
+                logger.warning(
+                    'Template file given doesnt exists, creating empty image')
+                generated = self.__create_new_image(
+                    self.dimensions['print_pic_size'])
             else:
                 generated = Image.open(config['print_pic']['template'])
         else:
-            generated = self.__create_new_image(self.dimensions['print_pic_size'])
+            generated = self.__create_new_image(
+                self.dimensions['print_pic_size'])
 
         for idx, thumbnail in enumerate(thumbnails):
             positions = self.__get_positions(idx, config, self.dimensions)
@@ -57,8 +61,8 @@ class PimatonImage(with_metaclass(Singleton, object)):
             # TODO: TMP code to be removed.
             tmp = ImageDraw.Draw(generated)
             tmp.rectangle([positions, (positions[0] +
-                                                      config['thumbnails']['width'], positions[1] +
-                                                      config['thumbnails']['height'])], outline="black")
+                                       config['thumbnails']['width'], positions[1] +
+                                       config['thumbnails']['height'])], outline="black")
 
         generated.save(
             config['print_pic']['output_dir'] +
@@ -66,14 +70,15 @@ class PimatonImage(with_metaclass(Singleton, object)):
             filename,
             'JPEG')
         logger.debug('Final picture has been generated')
-	# TODO: return generated image or name ? Will see what PimatonPrint need later on.
+        # TODO: return generated image or name ? Will see what PimatonPrint
+        # need later on.
 
     def __calculate_dimensions(self, config):
         """
         This private method calculate different variables needed to create the final image
         """
         logger.debug('Calculating dimensions with these values: %s' % config)
-	try:
+        try:
             dim = {
                 'thumbnail_size': (
                     config['thumbnails']['width'],
@@ -95,11 +100,13 @@ class PimatonImage(with_metaclass(Singleton, object)):
                 (
                     config['print_pic']['rows'] +
                     1)}
-	except Exception as e:
-	    raise PimatonImageExceptions('Cant calculate picture dimensions, something wrong: %s' % e)
+        except Exception as e:
+            raise PimatonImageExceptions(
+                'Cant calculate picture dimensions, something wrong: %s' % e)
 
         if dim['x_border'] < 0 or dim['y_border'] < 0:
-	    raise PimatonImageExceptions('X or Y border calculation went wrong, check dimension')
+            raise PimatonImageExceptions(
+                'X or Y border calculation went wrong, check dimension')
 
         logger.debug('Calculated dimensions: %s' % dim)
         return dim
@@ -119,4 +126,4 @@ class PimatonImage(with_metaclass(Singleton, object)):
         y_position = (current_row * dimensions['y_border']) + (
             (current_row - 1) * config['thumbnails']['height'])
 
-	return (x_position, y_position)
+        return (x_position, y_position)

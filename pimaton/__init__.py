@@ -38,7 +38,6 @@ def main():
         sys.exit(1)
 
 
-
 def configure_logging(debug=None):
     """
     Prepare log folder in current home directory.
