@@ -1,9 +1,8 @@
 import sys
-from time import sleep
 import logging
+import argparse
+from time import sleep
 
-logging.basicConfig()
-logger = logging.getLogger("Pimaton")
 
 from .Pimaton import Pimaton
 from .PimatonCam import PimatonCam
@@ -12,30 +11,46 @@ from .PimatonExceptions import PimatonExceptions, PimatonImageExceptions, Pimato
 from .Singleton import Singleton
 from ._version import version_str
 
+logging.basicConfig()
+logger = logging.getLogger("Pimaton")
 
 def main():
     """
     Main program loop
     """
-    # TODO : Manage --debug
-    configure_logging(True)
+
+    try:
+        args = retrieve_arguments(sys.argv[1:])
+    except SystemExit:
+        sys.exit(1)
+
+    configure_logging(args.debug)
     logger.info('*** Welcome to pimaton! ***')
 
-    # TODO v0.0.1 : Manage arguments
-
     # configure
-    logger.info('Starting configuring Pimaton')
+    logger.info('*** Starting configuring Pimaton ***')
+
     try:
         # Config app.
-        # TODO v0.0.1 : Add possibility to give alternative config file.
-        pimaton = Pimaton()
+        pimaton = Pimaton(args.config_file)
 
         # start app
-        logger.info('Starting Pimaton')
+        logger.info('*** Starting Pimaton Application ***')
         pimaton.run()
     except Exception as e:
         logger.critical('An error occured: %s' % e)
         sys.exit(1)
+
+
+def retrieve_arguments(args):
+    parser = argparse.ArgumentParser(description='Pimaton.')
+    parser.add_argument("--debug", action='store_true',
+	                help="Show debug output")
+    parser.add_argument("--config-file", help="Full path of the config file to load")
+    parser.add_argument('-v', '--version', help="Display Pimaton version",
+                        action='version', version='Pimaton ' + version_str)
+
+    return parser.parse_args(args)
 
 
 def configure_logging(debug=None):
@@ -52,7 +67,6 @@ def configure_logging(debug=None):
         "%Y-%m-%d %H:%M:%S")
 
     syslog = logging.StreamHandler()
-    syslog.setLevel(logging.DEBUG)
     syslog.setFormatter(formatter)
 
     if debug:
@@ -62,7 +76,6 @@ def configure_logging(debug=None):
 
     # add the handlers to logger
     logger.addHandler(syslog)
-
     logger.debug("Logger ready")
 
 

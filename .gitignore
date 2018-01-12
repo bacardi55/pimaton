@@ -60,3 +60,4 @@ target/
 
 # Pimaton template
 assets/templates/Madwin.tpl.jpg
+assets/madwin_config.yaml

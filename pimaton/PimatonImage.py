@@ -114,6 +114,7 @@ class PimatonImage(with_metaclass(Singleton, object)):
     def __create_new_image(self, dimensions):
         logger.debug("Creating empty default image")
         # TODO: Put the background color configurable.
+        # Not sure if that's needed with the whole template concept.
         return Image.new('RGB', dimensions, 'white')
 
     def __get_positions(self, idx, config, dimensions):

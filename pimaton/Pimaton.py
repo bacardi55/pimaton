@@ -20,6 +20,7 @@ class Pimaton:
     def __init__(self, config_file=None):
         logger.debug('Instantiate Pimaton class')
         self.set_config(config_file)
+
         # Init classes now so it checks the config early.
         self.pimatoncam = PimatonCam(self.config['picamera'])
         self.pimatonimage = PimatonImage(self.config['image'])
