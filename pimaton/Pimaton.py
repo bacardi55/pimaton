@@ -1,5 +1,7 @@
 from PimatonCam import PimatonCam 
 from time import time, sleep, strftime
+
+import yaml
 import datetime
 import logging
 
@@ -25,7 +27,6 @@ class Pimaton:
 
         while True:
             # TODO v0.0.2 : Manage button to start taking picture.
-            logger.debug('In Loop')
             unique_key = str(int(time()))
 	    taken_pictures = pimatoncam.take_pictures(unique_key)
 
@@ -44,43 +45,28 @@ class Pimaton:
             logger.debug('Sleeping %s second' % self.config['pimaton']['time_between_loop'])
 	    sleep(self.config['pimaton']['time_between_loop'])
 
-    def set_config(self, config):
+    def set_config(self, config_file=None):
         """
         Class method to set the configuration of the application
         """
-        logger.debug('Set configuration')
         # TODO v0.0.1 : Manage configuration.
-        config = {
-            'picamera': {
-                'photo_directory': '/home/pi/pimaton_pictures',
-                'number_of_pictures_to_take': 6,
-                'time_before_first_picture': 2,
-                'time_between_pictures': 1,
-                'picture_prefix_name': 'test_pimaton',
-                'generated_prefix_name': 'pimaton_'
-            },
-            'pimaton': {
-                'time_between_loop': 2
-            },
-            'image': {
-                'print_pic': {
-                    'template': None,
-                    'output_dir': '/home/pi/pimaton_pictures',
-                    'width': 1754,
-                    'height': 1241,
-                    'rows': 3,
-                    'cols': 2
-                },
-                'thumbnails': {
-                    'width': 560,
-                    'height': 496
-                },
-            }
-        }
+        if config_file is None:
+            config_file = './assets/default_config.yaml'
+            logging.debug('No given config, loading default one %s' % config_file)
 
-        logging.debug('Loading default config %s' % config)
-        self.config = config
+        # Overriding all config, so be sure when not using default one :).
+        self.config = self.load_config(config_file)
+        logger.debug('self config = %s' % self.config)
         
+    def load_config(self, config_file):
+        with open(config_file, 'r') as f:
+            data = yaml.load(f)
+
+        logger.debug("Loaded configuration: %s" % data)
+
+        return data
+
+
     def __get_fullpath_thumbnails_list(self, taken_pictures):
         fpp = []
         for pic in taken_pictures:

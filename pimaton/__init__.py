@@ -14,6 +14,7 @@ def main():
     """
     Main program loop
     """
+    # TODO : Manage --debug
     configure_logging(True)
     logger.info('Welcome to pimaton!')
 
@@ -22,7 +23,8 @@ def main():
     pimaton = Pimaton()
     # configure
     logger.info('Starting configuring Pimaton')
-    pimaton.set_config({})
+    # TODO v0.0.1 : Add possibility to give alternative config file.
+    pimaton.set_config()
 
     # start app
     logger.info('Starting Pimaton')

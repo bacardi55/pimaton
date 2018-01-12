@@ -38,10 +38,13 @@ class PimatonImage(with_metaclass(Singleton, object)):
                 # TODO
                 print("Error: %s" % e)
 
+        logger.debug(config['print_pic']['template'])
         if config['print_pic']['template'] is not None:
             # TODO: Check if file exists or raise exception.
+            logger.debug("Loading template file: %s" % config['print_pic']['template'])
             generated = Image.open(config['print_pic']['template'])
-        else:    
+        else:
+            logger.debug("No template file, creating empty image")
             generated = Image.new('RGB', dimensions['print_pic_size'], 'white')
 
         for idx, thumbnail in enumerate(thumbnails):
@@ -65,6 +68,8 @@ class PimatonImage(with_metaclass(Singleton, object)):
         """
         This private method calculate different variables needed to create the final image
         """
+        logger.debug('Calculating dimensions with these values: %s' % config)
+        # TODO: Add try to make sure numbers are right
         dim = {
             'thumbnail_size': (config['thumbnails']['width'], config['thumbnails']['height']),
             'print_pic_size': (config['print_pic']['width'], config['print_pic']['height']),

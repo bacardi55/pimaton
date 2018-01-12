@@ -58,3 +58,5 @@ docs/_build/
 # PyBuilder
 target/
 
+# Pimaton template
+assets/templates/Madwin.tpl.jpg

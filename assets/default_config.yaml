@@ -1,0 +1,24 @@
+---
+picamera: 
+    photo_directory: "/home/pi/pimaton_pictures"
+    number_of_pictures_to_take: 6
+    time_before_first_picture: 2
+    time_between_pictures: 1
+    picture_prefix_name: "test_pimaton"
+    generated_prefix_name: "pimaton"
+
+pimaton: 
+    time_between_loop: 2
+
+image:
+    print_pic:
+        template: "./assets/templates/Blank.tpl.jpg"
+        output_dir: "/home/pi/pimaton_pictures"
+        width: 1241
+        height: 1754
+        rows: 3
+        cols: 2
+
+    thumbnails: 
+        width: 560
+        height: 496

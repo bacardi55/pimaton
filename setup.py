@@ -9,7 +9,7 @@ setup(name='pimaton',
       license='GPLv3',
       packages=['pimaton'],
       install_requires=[
-          'picamera', 'six', 
+          'picamera', 'six', 'pyyaml', 'pillow'
       ],
       zip_safe=False)
 
