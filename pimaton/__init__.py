@@ -14,6 +14,7 @@ from ._version import version_str
 logging.basicConfig()
 logger = logging.getLogger("Pimaton")
 
+
 def main():
     """
     Main program loop
@@ -45,8 +46,10 @@ def main():
 def retrieve_arguments(args):
     parser = argparse.ArgumentParser(description='Pimaton.')
     parser.add_argument("--debug", action='store_true',
-	                help="Show debug output")
-    parser.add_argument("--config-file", help="Full path of the config file to load")
+                        help="Show debug output")
+    parser.add_argument(
+        "--config-file",
+        help="Full path of the config file to load")
     parser.add_argument('-v', '--version', help="Display Pimaton version",
                         action='version', version='Pimaton ' + version_str)
 
