@@ -12,12 +12,10 @@ class PimatonCam:
     Class that handles the PiCamera for the Pimaton app
     """
 
-    config = {}
-
     def __init__(self, config):
+        logger.debug('Instanciating PimatonCam with config %s' % config)
         self.picamera = PiCamera()
         self.config_picamera()
-        logger.debug('Instanciating PimatonCam with config %s' % config)
         self.config = config
 
     def take_pictures(self, unique_key):
@@ -45,7 +43,6 @@ class PimatonCam:
     def capture(self, filename):
         logger.debug("Capturing picture %s in %s" %
                      (filename, self.config['photo_directory']))
-        # TODO v0.0.1 : Manage exception.
         self.picamera.capture(self.config['photo_directory'] + '/' + filename)
 
     def config_picamera(self):

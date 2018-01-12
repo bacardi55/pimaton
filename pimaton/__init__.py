@@ -1,3 +1,4 @@
+import sys
 from time import sleep
 import logging
 
@@ -7,6 +8,7 @@ logger = logging.getLogger("Pimaton")
 from .Pimaton import Pimaton
 from .PimatonCam import PimatonCam
 from .PimatonImage import PimatonImage
+from .PimatonExceptions import PimatonExceptions, PimatonImageExceptions, PimatonCamExceptions
 from .Singleton import Singleton
 from ._version import version_str
 
@@ -17,19 +19,24 @@ def main():
     """
     # TODO : Manage --debug
     configure_logging(True)
-    logger.info('Welcome to pimaton!')
+    logger.info('*** Welcome to pimaton! ***')
 
     # TODO v0.0.1 : Manage arguments
 
-    pimaton = Pimaton()
     # configure
     logger.info('Starting configuring Pimaton')
-    # TODO v0.0.1 : Add possibility to give alternative config file.
-    pimaton.set_config()
+    try:
+        # Config app.
+        # TODO v0.0.1 : Add possibility to give alternative config file.
+        pimaton = Pimaton()
 
-    # start app
-    logger.info('Starting Pimaton')
-    pimaton.run()
+        # start app
+        logger.info('Starting Pimaton')
+        pimaton.run()
+    except Exception as e:
+        logger.critical('An error occured: %s' % e)
+        sys.exit(1)
+
 
 
 def configure_logging(debug=None):
