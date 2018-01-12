@@ -10,6 +10,7 @@ from .PimatonImage import PimatonImage
 from .Singleton import Singleton
 from ._version import version_str
 
+
 def main():
     """
     Main program loop
@@ -30,6 +31,7 @@ def main():
     logger.info('Starting Pimaton')
     pimaton.run()
 
+
 def configure_logging(debug=None):
     """
     Prepare log folder in current home directory.
@@ -39,7 +41,9 @@ def configure_logging(debug=None):
     logger.addFilter(AppFilter())
     logger.propagate = False
 
-    formatter = logging.Formatter('%(asctime)s :: %(app_version)s :: %(message)s', "%Y-%m-%d %H:%M:%S")
+    formatter = logging.Formatter(
+        '%(asctime)s :: %(app_version)s :: %(message)s',
+        "%Y-%m-%d %H:%M:%S")
 
     syslog = logging.StreamHandler()
     syslog.setLevel(logging.DEBUG)
@@ -60,7 +64,7 @@ class AppFilter(logging.Filter):
     """
     Class used to add a custom entry into the logger
     """
+
     def filter(self, record):
         record.app_version = "Pimaton-%s" % version_str
         return True
-
