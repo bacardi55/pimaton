@@ -20,7 +20,7 @@ class PimatonImage(with_metaclass(Singleton, object)):
     dimensions = {}
 
     def __init__(self, config):
-        logger.debug('Instantiate PimatonImage')
+        logger.debug('Instantiate PimatonImage with config = %s' % config)
         self.dimensions = self.__calculate_dimensions(config)
 
     def render_image_to_print(self, taken_pictures, filename, config):
