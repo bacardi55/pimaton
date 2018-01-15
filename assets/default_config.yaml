@@ -15,6 +15,7 @@ pimaton:
     time_between_loop: 2
     # UI mode, can be CLI or GUI
     # For the GUI to work, you need X and a desktop manager.
+    # Only cli mode is available for now.
     ui_mode: 'cli'
 
 # Image options.
