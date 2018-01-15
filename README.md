@@ -54,6 +54,37 @@ So far, the code in that repo can:
 - Only CLI mode for now
 - Only Keyboard input for now
 
+# How to install ?
+
+For now, clone the repository and go into the download directory, eg:
+
+``` bash
+git clone …
+cd pimaton
+```
+
+Syntax to use Pimaton is:
+
+```bash
+usage: pimaton.py [-h] [--debug] [--config-file CONFIG_FILE] [-v]
+
+Pimaton.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --debug               Show debug output
+  --config-file CONFIG_FILE
+                        Full path of the config file to load
+  -v, --version         Display Pimaton version
+```
+
+Example:
+
+```
+python pimaton.py --config-dir=/path/to/config_file.yaml # Run pymathon with given config file - should be the "production mode" command.
+python pimaton.py --debug # Display all debug messages and use default config file.
+python pimaton.py --debug --config-file=/path/to/config_file.yml # Display all debug messages and use custom config file.
+```
 
 # TODO
 
