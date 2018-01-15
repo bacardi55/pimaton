@@ -80,7 +80,7 @@ optional arguments:
 
 Example:
 
-```
+```bash
 python pimaton.py --config-dir=/path/to/config_file.yaml # Run pymathon with given config file - should be the "production mode" command.
 python pimaton.py --debug # Display all debug messages and use default config file.
 python pimaton.py --debug --config-file=/path/to/config_file.yml # Display all debug messages and use custom config file.
