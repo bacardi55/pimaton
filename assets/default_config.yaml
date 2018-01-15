@@ -13,6 +13,9 @@ picamera:
 # Pimaton global options.
 pimaton: 
     time_between_loop: 2
+    # UI mode, can be CLI or GUI
+    # For the GUI to work, you need X and a desktop manager.
+    ui_mode: 'cli'
 
 # Image options.
 image:
@@ -43,3 +46,15 @@ input:
     # Options depends on type.
     # Type: Keyboard doesn't have any options as it just wait for any key to be pressed.
     # options:
+
+print:
+    # If pimaton should try to print the generated picture.
+    enabled: true
+    # The rest of the options are only needed if pimaton[enable_print] is True.
+    user: 'pi'
+    printer_key: 0
+    app_name: 'Pimaton'
+    # Options to path to pycups printFile method
+    options:
+        fit-to-page: 'True'
+        # copies: 2

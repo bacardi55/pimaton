@@ -7,6 +7,7 @@ from time import sleep
 from .Pimaton import Pimaton
 from .PimatonCam import PimatonCam
 from .PimatonImage import PimatonImage
+from .PimatonPrint import PimatonPrint
 from .PimatonInput import PimatonInput
 from .PimatonExceptions import PimatonExceptions, PimatonImageExceptions, PimatonCamExceptions
 from .Singleton import Singleton
@@ -29,11 +30,9 @@ def main():
     configure_logging(args.debug)
     logger.info('*** Welcome to pimaton! ***')
 
-    # configure
-    logger.info('*** Starting configuring Pimaton ***')
-
     try:
         # Config app.
+        logger.info('*** Pimaton is loading... ***')
         pimaton = Pimaton(args.config_file)
 
         # start app
