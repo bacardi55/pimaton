@@ -9,3 +9,7 @@ class PimatonImageExceptions(PimatonExceptions):
 
 class PimatonCamExceptions(PimatonExceptions):
     pass
+
+
+class PimatonPrintExceptions(PimatonExceptions):
+    pass

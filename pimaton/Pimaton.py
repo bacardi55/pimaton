@@ -6,8 +6,9 @@ import logging
 
 from PimatonCam import PimatonCam
 from PimatonImage import PimatonImage
-from PimatonExceptions import PimatonExceptions
+from PimatonPrint import PimatonPrint
 from PimatonInput import PimatonInput, PimatonInputKeyboard
+from PimatonExceptions import PimatonExceptions, PimatonCamExceptions, PimatonPrintExceptions
 
 logging.basicConfig()
 logger = logging.getLogger("Pimaton")
@@ -19,7 +20,7 @@ class Pimaton:
     """
 
     def __init__(self, config_file=None):
-        logger.debug('Instantiate Pimaton class')
+        logger.info('*** Configuring Pimaton ***')
         self.set_config(config_file)
 
         # Init classes now so it checks the config early.
@@ -27,21 +28,30 @@ class Pimaton:
         self.pimatonimage = PimatonImage(self.config['image'])
         self.pimatoninput = self.init_input(self.config['input'])
 
+        if self.config['print']['enabled'] is True:
+            logger.info('**** Pimaton is configured to print images.')
+            self.pimatonprint = PimatonPrint(self.config['print'])
+        else:
+            logger.info('**** Pimaton is configured to NOT print image.')
+            self.pimatonprint = None
+
     def run(self):
         """
         Class method that run the main loop of the application.
         """
 
         while True:
-            # TODO v0.0.2 : Manage button to start taking picture.
+            # TODO v0.0.3 : Manage button to start taking picture.
             unique_key = str(int(time()))
 
             if self.pimatoninput.is_triggered() is False:
 	        continue
 
+            logger.info('*** Pimaton trigger has been pressed, starting taking pictures!')
+
             try:
                 taken_pictures = self.pimatoncam.take_pictures(unique_key)
-            except (PimatonCamExceptions, PiCameraError) as e:
+            except PimatonCamExceptions as e:
                 logger.error('An error occured when taking pictures: %s' % e)
                 raise PimatonExceptions("An error occured when taking picture")
 
@@ -55,19 +65,29 @@ class Pimaton:
                 '_' + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ".jpg"
 
             try:
-                to_print = self.pimatonimage.render_image_to_print(
+                logger.info('Starting image generation')
+
+                self.pimatonimage.render_image_to_print(
                     self.__get_fullpath_thumbnails_list(taken_pictures),
                     filename,
                     self.config['image'])
+                to_print = self.config['image']['print_pic']['output_dir'] + '/' + filename
+
             except PimatonExceptions as e:
                 logger.error('PimatonImageExceptions: %s' % e)
                 raise PimatonExceptions(
                     'Couldnt generate the picture to print')
 
             # TODO v0.0.3 : Manage print.
-            # try:
-                # pimatonprint = PimatonPrint()
-            # except PimatonPrintExceptions as e:
+            if self.config['print']['enabled'] is True \
+                    and isinstance(self.pimatonprint, PimatonPrint):
+                try:
+                    self.pimatonprint.print_file(to_print)
+                except PimatonPrintExceptions as e:
+                    logger.debug('An error occured when trying to print the image: %s' % e)
+                    raise 
+            else:
+                logger.debug('Print is disable, skipping')
 
             logger.debug('Sleeping %s second' %
                          self.config['pimaton']['time_between_loop'])
