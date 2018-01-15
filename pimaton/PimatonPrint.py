@@ -19,9 +19,14 @@ class PimatonPrint:
             raise PimatonPrintExceptions('File to print doesnt exist')
 
         try:
-            self.conn.printFile(self.printer, to_print, self.config['app_name'], self.config['options'])
+            self.conn.printFile(
+                self.printer,
+                to_print,
+                self.config['app_name'],
+                self.config['options'])
         except Exception as e:
-            raise PimatonPrintExceptions('Couldnt print file, an error occured: %s' % e)
+            raise PimatonPrintExceptions(
+                'Couldnt print file, an error occured: %s' % e)
 
     def config_printer(self, config):
         try:

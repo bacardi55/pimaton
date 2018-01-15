@@ -12,4 +12,3 @@ setup(name='pimaton',
           'picamera', 'six', 'pyyaml', 'pillow', 'pycups'
       ],
       zip_safe=False)
-

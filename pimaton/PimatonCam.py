@@ -47,9 +47,11 @@ class PimatonCam:
         logger.debug("Capturing picture %s in %s" %
                      (filename, self.config['photo_directory']))
         try:
-            self.picamera.capture(self.config['photo_directory'] + '/' + filename)
+            self.picamera.capture(
+                self.config['photo_directory'] + '/' + filename)
         except Exception as e:
-            raise PimatonCamExceptions('An error occured capturing the picture: %s' % e)
+            raise PimatonCamExceptions(
+                'An error occured capturing the picture: %s' % e)
 
     def config_picamera(self):
         logger.debug('Configuring Pi Camera')
@@ -72,5 +74,5 @@ class PimatonCam:
             self.picamera.rotation = 0
             self.picamera.hflip = True
             self.picamera.vflip = False
-        except:
-            raise PimatonCamExceptions('Couldnt config picamera')
+        except Exception as e:
+            raise PimatonCamExceptions('Couldnt config picamera: %s' % e)

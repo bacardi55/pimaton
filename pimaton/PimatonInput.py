@@ -4,6 +4,7 @@ import logging
 logging.basicConfig()
 logger = logging.getLogger("Pimaton")
 
+
 class PimatonInput:
     __metaclass__ = abc.ABCMeta
 
@@ -17,6 +18,7 @@ class PimatonInputKeyboard(PimatonInput):
         logger.debug('Waiting for any key to be pressed')
         input = raw_input("Press enter to start")
         return True
+
 
 class PimatonInputGPIO(PimatonInput):
     pass

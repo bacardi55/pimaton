@@ -45,9 +45,10 @@ class Pimaton:
             unique_key = str(int(time()))
 
             if self.pimatoninput.is_triggered() is False:
-	        continue
+                continue
 
-            logger.info('*** Pimaton trigger has been pressed, starting taking pictures!')
+            logger.info(
+                '*** Pimaton trigger has been pressed, starting taking pictures!')
 
             try:
                 taken_pictures = self.pimatoncam.take_pictures(unique_key)
@@ -61,8 +62,8 @@ class Pimaton:
                 raise PimatonExceptions(
                     'The number of taken pictures isnt right.')
 
-            filename = self.config['image']['print_pic']['generated_prefix_name'] + '_' + unique_key + \
-                '_' + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ".jpg"
+            filename = self.config['image']['print_pic']['generated_prefix_name'] + '_' + \
+                unique_key + '_' + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ".jpg"
 
             try:
                 logger.info('Starting image generation')
@@ -71,7 +72,8 @@ class Pimaton:
                     self.__get_fullpath_thumbnails_list(taken_pictures),
                     filename,
                     self.config['image'])
-                to_print = self.config['image']['print_pic']['output_dir'] + '/' + filename
+                to_print = self.config['image']['print_pic']['output_dir'] + \
+                    '/' + filename
 
             except PimatonExceptions as e:
                 logger.error('PimatonImageExceptions: %s' % e)
@@ -84,8 +86,10 @@ class Pimaton:
                 try:
                     self.pimatonprint.print_file(to_print)
                 except PimatonPrintExceptions as e:
-                    logger.debug('An error occured when trying to print the image: %s' % e)
-                    raise 
+                    logger.debug(
+                        'An error occured when trying to print the image: %s' %
+                        e)
+                    raise
             else:
                 logger.debug('Print is disable, skipping')
 
@@ -128,12 +132,15 @@ class Pimaton:
             pimatoninput = PimatonInputKeyboard()
 
         elif self.config['input']['type'] == 'GPIO':
-	    # TODO v0.0.2
+            # TODO v0.0.2
             pimatoninput = PimatonInputGPIO()
         else:
-            raise PimatonExceptions('Not recognized input type % s' % self.config['input']['type'])
+            raise PimatonExceptions(
+                'Not recognized input type % s' %
+                self.config['input']['type'])
 
         return pimatoninput
+
 
 class PimatonExceptions:
     pass

@@ -4,7 +4,7 @@ import pimaton
 
 if __name__ == '__main__':
     try:
-	pimaton.main()
+        pimaton.main()
 
     except KeyboardInterrupt:
         print("Leaving pimaton, goodbye")
@@ -13,7 +13,7 @@ if __name__ == '__main__':
         print("unexpected error: ", str(exception))
 
     finally:
-        #camera.stop_preview()
-        #camera.close()
-        #GPIO.cleanup()
-	pass
+        # camera.stop_preview()
+        # camera.close()
+        # GPIO.cleanup()
+        pass
