@@ -9,6 +9,9 @@ setup(name='pimaton',
       license='GPLv3',
       packages=['pimaton'],
       install_requires=[
-          'picamera', 'six', 'pyyaml', 'pillow', 'pycups'
+          'picamera', 'six', 'pyyaml', 'pillow'
       ],
+      extras_require={
+          'Print':  ["pycups"]
+      },
       zip_safe=False)
