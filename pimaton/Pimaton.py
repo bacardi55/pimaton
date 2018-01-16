@@ -107,7 +107,7 @@ class Pimaton:
                 'No given config, loading default one %s' %
                 config_file)
         else:
-            logger.debug('No template given, loading default one')
+            logger.debug('Loading configuration file: %s' % config_file)
 
         # Overriding all config, so be sure when not using default one :).
         self.config = self.load_config(config_file)
