@@ -3,6 +3,8 @@ from time import sleep, strftime
 import datetime
 import logging
 
+from PimatonExceptions import PimatonCamExceptions
+
 logging.basicConfig()
 logger = logging.getLogger("Pimaton")
 
@@ -15,7 +17,7 @@ class PimatonCam:
     def __init__(self, config):
         logger.debug('Instanciating PimatonCam with config %s' % config)
         self.picamera = PiCamera()
-        self.config_picamera()
+        self.config_picamera(config)
         self.config = config
 
     def take_pictures(self, unique_key):
@@ -53,26 +55,41 @@ class PimatonCam:
             raise PimatonCamExceptions(
                 'An error occured capturing the picture: %s' % e)
 
-    def config_picamera(self):
+    def config_picamera(self, config):
         logger.debug('Configuring Pi Camera')
-        # TODO v0.0.1 : Manage camera configuration.
 
         try:
-            # self.picamera.resolution            = (1920, 1440)
-            self.picamera.resolution = (640, 480)
-            # self.picamera.framerate             = 24
-            # self.picamera.sharpness             = 0
-            # self.picamera.contrast              = 0
-            # self.picamera.brightness            = 50
-            # self.picamera.saturation            = 0
-            # self.picamera.iso                   = 0
-            # self.picamera.video_stabilization   = False
-            # self.picamera.exposure_compensation = 0
-            self.picamera.exposure_mode = 'auto'
-            self.picamera.meter_mode = 'average'
-            self.picamera.awb_mode = 'auto'
-            self.picamera.rotation = 0
-            self.picamera.hflip = True
-            self.picamera.vflip = False
+            self.picamera.resolution = (config['settings']['resolution']['width'], config['settings']['resolution']['height'])
+            self.picamera.framerate = config['settings']['framerate']
+            self.picamera.sharpness = config['settings']['sharpness']
+            self.picamera.contrast = config['settings']['contrast']
+            self.picamera.brightness = config['settings']['brightness']
+            self.picamera.saturation = config['settings']['saturation']
+            self.picamera.iso = config['settings']['iso']
+            self.picamera.video_stabilization = config['settings']['video_stabilization']
+            self.picamera.exposure_compensation = config['settings']['exposure_compensation']
+            self.picamera.exposure_mode = config['settings']['exposure_mode']
+            self.picamera.meter_mode = config['settings']['meter_mode']
+            self.picamera.awb_mode = config['settings']['awb_mode']
+            self.picamera.rotation = config['settings']['rotation']
+            self.picamera.hflip = config['settings']['hflip']
+            self.picamera.vflip = config['settings']['vflip']
+
+#            # self.picamera.resolution            = (1920, 1440)
+#            self.picamera.resolution = (640, 480)
+#            # self.picamera.framerate             = 24
+#            # self.picamera.sharpness             = 0
+#            # self.picamera.contrast              = 0
+#            # self.picamera.brightness            = 50
+#            # self.picamera.saturation            = 0
+#            # self.picamera.iso                   = 0
+#            # self.picamera.video_stabilization   = False
+#            # self.picamera.exposure_compensation = 0
+#            self.picamera.exposure_mode = 'auto'
+#            self.picamera.meter_mode = 'average'
+#            self.picamera.awb_mode = 'auto'
+#            self.picamera.rotation = 0
+#            self.picamera.hflip = True
+#            self.picamera.vflip = False
         except Exception as e:
             raise PimatonCamExceptions('Couldnt config picamera: %s' % e)

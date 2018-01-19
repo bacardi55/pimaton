@@ -13,10 +13,10 @@ picamera:
 # Pimaton global options.
 pimaton: 
     time_between_loop: 2
-    # UI mode, can be CLI or GUI
+    # UI mode, can be tui (Text user interface) or GUI (graphical user interface)
     # For the GUI to work, you need X and a desktop manager.
-    # Only cli mode is available for now.
-    ui_mode: 'cli'
+    # Only tui mode is available for now.
+    ui_mode: 'tui'
 
 # Image options.
 image:
