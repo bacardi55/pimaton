@@ -9,6 +9,9 @@ from .PimatonCam import PimatonCam
 from .PimatonImage import PimatonImage
 from .PimatonPrint import PimatonPrint
 from .PimatonInput import PimatonInput
+from .PimatonUI import PimatonUI
+from .PimatonTUI import PimatonTUI
+# from .PimatonGUI import PimatonGUI
 from .PimatonExceptions import PimatonExceptions, PimatonImageExceptions, PimatonCamExceptions
 from .Singleton import Singleton
 from ._version import version_str
@@ -36,8 +39,23 @@ def main():
         pimaton = Pimaton(args.config_file)
 
         # start app
-        logger.info('*** Starting Pimaton Application ***')
-        pimaton.run()
+        # logger.info('*** Starting Pimaton Application ***')
+        # pimaton.run()
+
+        logger.info('*** Loading UI... ***')
+        mode = pimaton.get_ui_mode()
+        if mode == 'tui':
+            logger.info('*** Loading Text UI... ***')
+            pimatonui = PimatonTUI(pimaton)
+        elif mode == 'gui':
+            logger.info('*** Loading Graphical UI... ***')
+            # pimatonui = PimatonGUI(pimaton)
+            pimatonui = None
+        else:
+            pimatonui = None
+
+        pimatonui.mainloop()
+
     except Exception as e:
         logger.critical('An error occured: %s' % e)
         sys.exit(1)
