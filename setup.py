@@ -12,6 +12,6 @@ setup(name='pimaton',
           'picamera', 'six', 'pyyaml', 'pillow'
       ],
       extras_require={
-          'Print':  ["pycups"]
+          'Print': ["pycups"]
       },
       zip_safe=False)

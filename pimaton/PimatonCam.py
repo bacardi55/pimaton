@@ -59,7 +59,9 @@ class PimatonCam:
         logger.debug('Configuring Pi Camera')
 
         try:
-            self.picamera.resolution = (config['settings']['resolution']['width'], config['settings']['resolution']['height'])
+            self.picamera.resolution = (
+                config['settings']['resolution']['width'],
+                config['settings']['resolution']['height'])
             self.picamera.framerate = config['settings']['framerate']
             self.picamera.sharpness = config['settings']['sharpness']
             self.picamera.contrast = config['settings']['contrast']

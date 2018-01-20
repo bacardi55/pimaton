@@ -87,7 +87,6 @@ class Pimaton:
                      self.config['pimaton']['time_between_loop'])
         sleep(self.config['pimaton']['time_between_loop'])
 
-
     def set_config(self, config_file=None):
         """
         Class method to set the configuration of the application

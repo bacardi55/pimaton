@@ -4,6 +4,7 @@ import logging
 logging.basicConfig()
 logger = logging.getLogger("Pimaton")
 
+
 class PimatonUI():
     __metaclass__ = abc.ABCMeta
 
