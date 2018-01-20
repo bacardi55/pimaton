@@ -38,10 +38,6 @@ def main():
         logger.info('*** Pimaton is loading... ***')
         pimaton = Pimaton(args.config_file)
 
-        # start app
-        # logger.info('*** Starting Pimaton Application ***')
-        # pimaton.run()
-
         logger.info('*** Loading UI... ***')
         mode = pimaton.get_ui_mode()
         if mode == 'tui':
