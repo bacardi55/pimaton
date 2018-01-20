@@ -7,9 +7,9 @@ Pimaton is a simple photo booth application that can run on a raspberry pi with 
 The principle is simple, it takes picture when triggered (configurable number), then generate a picture with all the taken pictures that can be printed (optional) or send somewhere (not developed yet)
 
 The main goals of Pimaton are:
-- To be simple (goal is to be installable via Pip soon)
+- To be simple and instable quickly on a raspberrypi (goal is to be installable via Pip soon)
 - To be configurable ([check the config file](assets/default_config.yaml) to see all options, but number of images and their sizes can be changed. Even the background of the generated picture can be customized by using a template image based.
-- To run either on CLI (still with camera preview thanks to PiCamera) or via a GUI (if X installed)
+- To run either on CLI (still with camera preview thanks to PiCamera) or via a GUI (if X installed, will run a TK app in fullscreen mode)
 - To be triggered either via keyboard or via GPIO (if like me you want to plug an big arcade button :))
 - If there is an internet connection:
   - To sync pictures on a web servers
@@ -26,10 +26,10 @@ I am sure i might have other ideas over time too :).
   - Core architecture.
   - Take configurable pictures via picamera.
   - Generate an configurable image with the taken picture and an optional template.
-- v0.0.2 (WIP):
+- v0.0.2 (done):
   - Print picture via cups (done)
   - Manage PiCamera configuration
-- v0.0.3:
+- v0.0.3 (WIP):
   - Add optional GUI
 - v0.0.4:
   - Add GPIO input option (might switch to v0.0.4)
@@ -51,8 +51,8 @@ So far, the code in that repo can:
 - Take pictures via the PiCamera (number and size configurable) (configuration of the PiCamera options to come soon)
 - Generate an image based on the taken pictures (rendered image is configurable but be careful and test the rendering :p)
 - Print the image via cups (so a printer needs to be installed)
-- Only CLI mode for now
-- Only Keyboard input for now
+- Only CLI mode for now (but GUI work has started)
+- Only Keyboard input for now (but GUI touchscreen input work started)
 
 # How to install ?
 
@@ -88,7 +88,7 @@ python pimaton.py --debug --config-file=/path/to/config_file.yml # Display all d
 
 # TODO
 
-- Implement a UI (but first choose the GUI lib…)
+- Implement a UI (work started on TK)
 - Implement the GPIO input
 - Implement all the web features.
 - Add an option to use a simcard if no wifi is availble where you are.
