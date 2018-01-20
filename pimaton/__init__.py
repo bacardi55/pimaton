@@ -11,7 +11,7 @@ from .PimatonPrint import PimatonPrint
 from .PimatonInput import PimatonInput
 from .PimatonUI import PimatonUI
 from .PimatonTUI import PimatonTUI
-# from .PimatonGUI import PimatonGUI
+from .PimatonGUI import PimatonGUI
 from .PimatonExceptions import PimatonExceptions, PimatonImageExceptions, PimatonCamExceptions
 from .Singleton import Singleton
 from ._version import version_str
@@ -49,8 +49,7 @@ def main():
             pimatonui = PimatonTUI(pimaton)
         elif mode == 'gui':
             logger.info('*** Loading Graphical UI... ***')
-            # pimatonui = PimatonGUI(pimaton)
-            pimatonui = None
+            pimatonui = PimatonGUI(pimaton)
         else:
             pimatonui = None
 
