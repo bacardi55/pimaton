@@ -12,6 +12,7 @@ from .PimatonInput import PimatonInput
 from .PimatonUI import PimatonUI
 from .PimatonTUI import PimatonTUI
 from .PimatonGUI import PimatonGUI
+from .PimatonGUITK import PimatonGUITK
 from .PimatonExceptions import PimatonExceptions, PimatonImageExceptions, PimatonCamExceptions
 from .Singleton import Singleton
 from ._version import version_str
