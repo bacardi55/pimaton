@@ -15,7 +15,7 @@ class PimatonInput:
 
 class PimatonInputKeyboard(PimatonInput):
     def is_triggered(self):
-        logger.debug('Waiting for any key to be pressed')
+        logger.debug('Waiting for start key to be pressed')
         input = raw_input("Press enter to start")
         return True
 

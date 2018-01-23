@@ -34,7 +34,7 @@ class PimatonGUITK(tk.Frame, object):
             'screens': {
                 'waiting': WaitingScreen(self, self.config),
                 'processing': ProcessingScreen(self),
-                'thanking': ThankyouScreen(self)
+                'thanking': ThankyouScreen(self, self.config)
             }
         }
         logger.debug('** GUI ** All screens have been initiated')
@@ -56,7 +56,6 @@ class PimatonGUITK(tk.Frame, object):
             text="STATISTIQUES").pack(
             side=tk.RIGHT,
             anchor="ne")
-        # TODO: configurable.
         tk.Label(header_frame, text=self.config['header_message']).pack(side=tk.TOP)
 
         return header_frame
@@ -70,7 +69,6 @@ class PimatonGUITK(tk.Frame, object):
             side=tk.BOTTOM,
             padx=10,
             pady=10)
-        # TODO: configurable.
         tk.Label(
             footer_frame,
             text=self.config['footer_message']).pack(
@@ -91,8 +89,7 @@ class PimatonGUITK(tk.Frame, object):
         self.ui['screens']['processing'].clean_process_screen()
         self.switch_to_thanking_screen()
 
-        # TODO: configurable time.
-        time.sleep(5)
+        time.sleep(self.config['time_between_thankyou_and_waiting'])
         self.switch_to_waiting_screen()
 
     def run_pimaton(self):
@@ -192,7 +189,6 @@ class WaitingScreen(tk.Frame, object):
         content_frame = tk.Frame(self)
         content_frame.pack(fill=tk.BOTH, expand=1, padx=10, pady=10)
         button_frame = tk.Frame(content_frame, borderwidth=2)
-        # TODO: configurable.
         tk.Button(
             button_frame,
             text=start_btn_txt,
@@ -265,20 +261,20 @@ class ProcessingScreen(tk.Frame, object):
 
 
 class ThankyouScreen(tk.Frame, object):
-    def __init__(self, master=None):
+    def __init__(self, master=None, config=None):
         super(ThankyouScreen, self).__init__(master)
         self.parent = master
-        self.create_thankyou_screen()
+        self.config = config
+        self.create_thankyou_screen(config['thankyou_message'])
 
-    def create_thankyou_screen(self):
+    def create_thankyou_screen(self, thankyou_message):
         logger.debug('** GUI ** Create thankyou screen')
         content_frame = tk.Frame(self)
         content_frame.pack(fill=tk.BOTH, expand=1, padx=10, pady=10)
 
-        # TODO: Configurable.
         tk.Label(
             content_frame,
-            text="Thank you for using Pimaton! Your photo is ready (or should be soon) :)").pack(
+            text=thankyou_message).pack(
             fill=tk.BOTH)
 
     def hide(self):
