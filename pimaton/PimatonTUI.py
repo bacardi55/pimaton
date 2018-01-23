@@ -16,4 +16,12 @@ class PimatonTUI(PimatonUI, object):
 
             logger.info(
                 '*** Pimaton trigger has been pressed, starting taking pictures!')
-            self.pimaton.run()
+
+            unique_key = self.pimaton.get_unique_key()
+            taken_pictures = self.pimaton.take_pictures(unique_key)
+            filename = self.pimaton.get_filename(unique_key)
+            to_print = self.pimaton.generate_picture(
+                    taken_pictures,
+                    filename)
+            self.pimaton.print_picture(to_print)
+            self.pimaton.wait_before_next_iteration()

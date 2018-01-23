@@ -38,9 +38,7 @@ class Pimaton:
     def get_unique_key(cls):
         return str(int(time()))
 
-    def run(self):
-        unique_key = self.get_unique_key()
-
+    def take_pictures(self, unique_key):
         try:
             taken_pictures = self.pimatoncam.take_pictures(unique_key)
         except PimatonCamExceptions as e:
@@ -53,9 +51,15 @@ class Pimaton:
             raise PimatonExceptions(
                 'The number of taken pictures isnt right.')
 
+        return taken_pictures
+
+    def get_filename(self, unique_key):
         filename = self.config['image']['print_pic']['generated_prefix_name'] + '_' + \
             unique_key + '_' + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ".jpg"
 
+        return filename
+
+    def generate_picture(self, taken_pictures, filename):
         try:
             logger.info('Starting image generation')
 
@@ -65,12 +69,14 @@ class Pimaton:
                 self.config['image'])
             to_print = self.config['image']['print_pic']['output_dir'] + \
                 '/' + filename
+            return to_print
 
         except PimatonExceptions as e:
             logger.error('PimatonImageExceptions: %s' % e)
             raise PimatonExceptions(
                 'Couldnt generate the picture to print')
 
+    def print_picture(self, to_print):
         if self.config['print']['enabled'] is True \
                 and isinstance(self.pimatonprint, PimatonPrint):
             try:
@@ -83,8 +89,8 @@ class Pimaton:
         else:
             logger.debug('Print is disable, skipping')
 
-        logger.debug('Sleeping %s second' %
-                     self.config['pimaton']['time_between_loop'])
+    def wait_before_next_iteration(self):
+        logger.debug('Sleeping %s second' % self.config['pimaton']['time_between_loop'])
         sleep(self.config['pimaton']['time_between_loop'])
 
     def set_config(self, config_file=None):
@@ -133,6 +139,13 @@ class Pimaton:
 
     def get_ui_mode(self):
         return self.config['pimaton']['ui_mode']
+
+    def is_print_enabled(self):
+        return self.config['print']['enabled']
+
+    def is_sync_enabled(self):
+        # Not implemented yet.
+        return False
 
 
 class PimatonExceptions:
