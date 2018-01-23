@@ -22,14 +22,14 @@ I am sure i might have other ideas over time too :).
 
 ## The high level roadmap
 
-- v0.0.1 - core feature (done):
-  - Core architecture.
-  - Take configurable pictures via picamera.
-  - Generate an configurable image with the taken picture and an optional template.
-- v0.0.2 - print capabilities (done):
-  - Print picture via cups (done)
-  - Manage PiCamera configuration
-- v0.0.3 - GUI implementation (WIP):
+- ~~v0.0.1 - core feature:~~
+  - ~~Core architecture.~~
+  - ~~Take configurable pictures via picamera.~~
+  - ~~Generate an configurable image with the taken picture and an optional template.~~
+- ~~v0.0.2 - print capabilities:~~
+  - ~~Print picture via cups~~
+  - ~~Manage PiCamera configuration~~
+- v0.0.3 - GUI implementation (WIP, you can look at the [dedicated branch](https://git.bacardi55.org/bacardi55/pimaton/src/feature/%238-UI) to see it running (basic workflow works):
   - Add optional GUI
 - v0.0.4 - Hardware:
   - Add GPIO input option (might switch to v0.0.4)
@@ -58,11 +58,24 @@ So far, the code in that repo can:
 
 # How to install ?
 
+# Dependencies
+
+Install python and pip. 
+Install python-pil.imagetk if you want to use the GUI.
+
 For now, clone the repository and go into the download directory, eg:
 
 ``` bash
 git clone …
 cd pimaton
+```
+
+Install the python extension (will be automated via pip)
+
+```bash
+pip install picamera six pyyaml pillow
+# To be able to print
+pip install pycups
 ```
 
 Syntax to use Pimaton is:
