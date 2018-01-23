@@ -40,6 +40,12 @@ pimaton:
     # Only tui mode is available for now.
     ui_mode: 'tui'
 
+# This section is only used if pimaton[ui_mode] is set to "gui"
+gui:
+    header_message: "Pimaton - Opensource PhotoBooth app for Rpi!"
+    footer_message: "All pictures will be saved and sent to the newly wed, be careful ;)"
+    start_btn_txt: "Let's roll!"
+
 # Image options.
 image:
     print_pic:
