@@ -13,6 +13,7 @@ class PimatonGUITK(tk.Frame, object):
     def __init__(self, master=None, pimaton=None):
         super(PimatonGUITK, self).__init__(master)
         self.pimaton = pimaton
+        self.config = self.pimaton.config['gui']
         self.parent = master
         self.pack(fill=tk.BOTH, expand=1)
 
@@ -31,7 +32,7 @@ class PimatonGUITK(tk.Frame, object):
             'header': self.create_header(),
             'footer': self.create_footer(),
             'screens': {
-                'waiting': WaitingScreen(self),
+                'waiting': WaitingScreen(self, self.config),
                 'processing': ProcessingScreen(self),
                 'thanking': ThankyouScreen(self)
             }
@@ -56,7 +57,7 @@ class PimatonGUITK(tk.Frame, object):
             side=tk.RIGHT,
             anchor="ne")
         # TODO: configurable.
-        tk.Label(header_frame, text="WELCOME MESSAGE!").pack(side=tk.TOP)
+        tk.Label(header_frame, text=self.config['header_message']).pack(side=tk.TOP)
 
         return header_frame
 
@@ -72,7 +73,7 @@ class PimatonGUITK(tk.Frame, object):
         # TODO: configurable.
         tk.Label(
             footer_frame,
-            text="Disclaimer message!").pack(
+            text=self.config['footer_message']).pack(
             anchor=tk.CENTER)
 
         return footer_frame
@@ -181,12 +182,12 @@ class PimatonGUITK(tk.Frame, object):
 
 
 class WaitingScreen(tk.Frame, object):
-    def __init__(self, master=None):
+    def __init__(self, master=None, config=None):
         super(WaitingScreen, self).__init__(master)
         self.parent = master
-        self.create_waiting_screen()
+        self.create_waiting_screen(config['start_btn_txt'])
 
-    def create_waiting_screen(self):
+    def create_waiting_screen(self, start_btn_txt):
         logger.debug('** GUI ** Create waiting screen')
         content_frame = tk.Frame(self)
         content_frame.pack(fill=tk.BOTH, expand=1, padx=10, pady=10)
@@ -194,7 +195,7 @@ class WaitingScreen(tk.Frame, object):
         # TODO: configurable.
         tk.Button(
             button_frame,
-            text="START MESSAGE",
+            text=start_btn_txt,
             command=self.start_triggered).pack(
             anchor=tk.CENTER)
         button_frame.place(relx=.5, rely=.5, anchor=tk.CENTER)

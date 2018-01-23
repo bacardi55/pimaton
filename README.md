@@ -39,7 +39,7 @@ These items might move from one milestone to the other. This list should uptodat
     - ~~Touchscreen input to start process~~
     - Make it pretty (stuff I don't like/know how to do :P)
     - Put a picture (either 1st taken pic or an animated gif) on the processing screen
-    - Make all text configurable.
+    - ~~Make all text configurable~~
     - Implement a "statistics" area in the header (eg: "X pic has been taken since Pimaton starter")
   - ~~Add PiCamera overlay (countdown between pictures)~~
   - Implement multi input in in both TUI and GUI mode
