@@ -12,11 +12,11 @@ class PimatonGUI(PimatonUI, object):
     """
     GUI central class
     """
+
     def __init__(self, pimaton):
         super(PimatonGUI, self).__init__(pimaton)
         self.root = self.init_tk_root()
         self.app = self.init_tk_app(self.root)
-
 
     def init_tk_root(self):
         root = tk.Tk()
@@ -35,7 +35,3 @@ class PimatonGUI(PimatonUI, object):
 
     def mainloop(self):
         self.app.mainloop()
-
-
-
-

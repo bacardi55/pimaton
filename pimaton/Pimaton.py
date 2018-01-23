@@ -90,7 +90,9 @@ class Pimaton:
             logger.debug('Print is disable, skipping')
 
     def wait_before_next_iteration(self):
-        logger.debug('Sleeping %s second' % self.config['pimaton']['time_between_loop'])
+        logger.debug(
+            'Sleeping %s second' %
+            self.config['pimaton']['time_between_loop'])
         sleep(self.config['pimaton']['time_between_loop'])
 
     def set_config(self, config_file=None):

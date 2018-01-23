@@ -21,7 +21,7 @@ class PimatonTUI(PimatonUI, object):
             taken_pictures = self.pimaton.take_pictures(unique_key)
             filename = self.pimaton.get_filename(unique_key)
             to_print = self.pimaton.generate_picture(
-                    taken_pictures,
-                    filename)
+                taken_pictures,
+                filename)
             self.pimaton.print_picture(to_print)
             self.pimaton.wait_before_next_iteration()

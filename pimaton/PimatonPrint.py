@@ -21,15 +21,16 @@ class PimatonPrint:
             raise PimatonPrintExceptions('File to print doesnt exist')
 
         try:
-            # Can't get the "copies" option to work with pycups, so ugly workaround beloow...
+            # Can't get the "copies" option to work with pycups, so ugly
+            # workaround beloow...
             options = dict(self.config['options'])
             del options['copies']
             for c in range(0, int(self.config['options']['copies'])):
                 printid = self.conn.printFile(
                     self.printer,
-                   to_print,
-                   self.config['app_name'],
-                   options)
+                    to_print,
+                    self.config['app_name'],
+                    options)
 
                 if self.config['wait_for_finished_job'] is True:
                     while self.conn.getJobs().get(printid, None) is not None:
