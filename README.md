@@ -22,15 +22,28 @@ I am sure i might have other ideas over time too :).
 
 ## The high level roadmap
 
+These items might move from one milestone to the other. This list should uptodate with the current codebase.
+
 - ~~v0.0.1 - core feature:~~
   - ~~Core architecture.~~
+  - ~~Yaml configuration import~~
   - ~~Take configurable pictures via picamera.~~
   - ~~Generate an configurable image with the taken picture and an optional template.~~
+  - ~~Keyboard input to start process~~
 - ~~v0.0.2 - print capabilities:~~
   - ~~Print picture via cups~~
   - ~~Manage PiCamera configuration~~
 - v0.0.3 - GUI implementation (WIP, you can look at the [dedicated branch](https://git.bacardi55.org/bacardi55/pimaton/src/feature/%238-UI) to see it running (basic workflow works):
   - Add optional GUI
+    - ~~Implement basic UI with all screens (waiting, processing and thankyou screen)~~
+    - ~~Touchscreen input to start process~~
+    - Make it pretty (stuff I don't like/know how to do :P)
+    - Put a picture (either 1st taken pic or an animated gif) on the processing screen
+    - Make all text configurable.
+    - Implement a "statistics" area in the header (eg: "X pic has been taken since Pimaton starter")
+  - ~~Add PiCamera overlay (countdown between pictures)~~
+  - Implement multi input in in both TUI and GUI mode
+  - Create pip package (should be already usable at this stage)
 - v0.0.4 - Hardware:
   - Add GPIO input option (might switch to v0.0.4)
   - Camera Flash capability
