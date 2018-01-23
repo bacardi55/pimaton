@@ -9,6 +9,28 @@ picamera:
     time_between_pictures: 1
     # Prefix for the name of the taken pictures.
     picture_prefix_name: "test_pimaton"
+    # PiCamera specific settings.
+    # For more information, see the PiCamera class here:
+    # https://picamera.readthedocs.io/en/latest/api_camera.html
+    settings:
+        resolution: 
+            width: 560
+            height: 496
+        framerate: 30
+        sharpness: 0
+        contrast: 0
+        brightness: 50
+        saturation: 0
+        iso: 0
+        video_stabilization: False
+        exposure_compensation: 0
+        exposure_mode: 'auto'
+        meter_mode: 'backlit'
+        awb_mode: 'auto'
+        rotation: 0
+        hflip: True
+        vflip: False
+        annotate_text_size: 80
 
 # Pimaton global options.
 pimaton: 
@@ -55,7 +77,8 @@ print:
     user: 'pi'
     printer_key: 0
     app_name: 'Pimaton'
-    # If Like me, your printer doesn't like receiving 2 commands too fast, you can set a timer between each print command.
+    # If Like me, your printer doesn't like receiving 2 commands too fast, 
+    # you can set a timer between each print command.
     time_between_print: 5
     # If your printer works faster if you wait for the previous job to be finished.
     wait_for_finished_job: true
