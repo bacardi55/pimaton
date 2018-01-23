@@ -43,8 +43,7 @@ class PimatonGUITK(tk.Frame, object):
 
     def create_header(self):
         logger.debug('** GUI ** Create gui header area')
-        # TODO: change background.
-        header_frame = tk.Frame(self, background="green", height=1000)
+        header_frame = tk.Frame(self, height=1000)
         header_frame.pack(expand=0, fill=tk.X, side=tk.TOP, padx=10, pady=10)
 
         self.current_time = datetime.datetime.now().strftime('%H:%M')
@@ -59,7 +58,7 @@ class PimatonGUITK(tk.Frame, object):
 
     def create_footer(self):
         logger.debug('** GUI ** Create gui footer area')
-        footer_frame = tk.Frame(self, background="yellow")
+        footer_frame = tk.Frame(self)
         footer_frame.pack(expand=0, fill=tk.X, side=tk.BOTTOM, padx=10, pady=10)
         # TODO: configurable.
         tk.Label(footer_frame, text="Disclaimer message!").pack(anchor=tk.CENTER)
@@ -168,11 +167,9 @@ class WaitingScreen(tk.Frame, object):
 
     def create_waiting_screen(self):
         logger.debug('** GUI ** Create waiting screen')
-        # TODO: change background.
-        content_frame = tk.Frame(self, background="red")
+        content_frame = tk.Frame(self)
         content_frame.pack(fill=tk.BOTH, expand=1, padx=10, pady=10)
-        # TODO: change background.
-        button_frame = tk.Frame(content_frame, background="orange", borderwidth=2)
+        button_frame = tk.Frame(content_frame, borderwidth=2)
         # TODO: configurable.
         tk.Button(button_frame, text="START MESSAGE", command=self.start_triggered).pack(anchor=tk.CENTER)
         button_frame.place(relx=.5, rely=.5, anchor=tk.CENTER)
@@ -196,8 +193,7 @@ class ProcessingScreen(tk.Frame, object):
 
     def create_processing_screen(self):
         logger.debug('** GUI ** Create gui processing screen')
-        # TODO: change background.
-        content_frame = tk.LabelFrame(self, text="Pimaton is working...", background="ivory")
+        content_frame = tk.LabelFrame(self, text="Pimaton is working...")
         content_frame.pack(fill=tk.BOTH, expand=1, padx=10, pady=10)
 
         # Progress Bar.
