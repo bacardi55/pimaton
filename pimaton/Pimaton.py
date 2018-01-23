@@ -128,7 +128,7 @@ class Pimaton:
             pimatoninput = PimatonInputKeyboard()
 
         elif self.config['input']['type'] == 'GPIO':
-            # TODO v0.0.2
+            # TODO v0.0.4
             pimatoninput = PimatonInputGPIO()
         else:
             raise PimatonExceptions(

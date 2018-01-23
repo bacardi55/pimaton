@@ -55,7 +55,12 @@ print:
     user: 'pi'
     printer_key: 0
     app_name: 'Pimaton'
+    # If Like me, your printer doesn't like receiving 2 commands too fast, you can set a timer between each print command.
+    time_between_print: 5
+    # If your printer works faster if you wait for the previous job to be finished.
+    wait_for_finished_job: true
     # Options to path to pycups printFile method
     options:
+        # Options must have string key and value, do not remove the quotes. 
         fit-to-page: 'True'
-        # copies: 2
+        copies: '1'

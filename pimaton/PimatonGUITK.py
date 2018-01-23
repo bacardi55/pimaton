@@ -36,7 +36,7 @@ class PimatonGUITK(tk.Frame, object):
                 'thanking': ThankyouScreen(self)
             }
         }
-        logger.debug('All screens have been initiated')
+        logger.debug('** GUI ** All screens have been initiated')
 
         # Show waiting screen to start with.
         self.ui['screens']['waiting'].show()
@@ -98,7 +98,7 @@ class PimatonGUITK(tk.Frame, object):
 
         time.sleep(1)
 
-        if self.pimaton.is_print_enabled():
+        if self.pimaton.is_print_enabled() is True:
             self.ui['screens']['processing'].set_progress_value(self.current_step * self.progress_inc)
             self.ui['screens']['processing'].set_step_value('Step ' + str(self.current_step) + '/' + str(self.nb_steps) + ': Sending picture to printer')
             self.update_idletasks()
@@ -186,7 +186,7 @@ class WaitingScreen(tk.Frame, object):
 
     def show(self):
         self.pack(fill=tk.BOTH, expand=1)
-
+        
 
 class ProcessingScreen(tk.Frame, object):
     def __init__(self, master=None):
@@ -199,13 +199,6 @@ class ProcessingScreen(tk.Frame, object):
         # TODO: change background.
         content_frame = tk.LabelFrame(self, text="Pimaton is working...", background="ivory")
         content_frame.pack(fill=tk.BOTH, expand=1, padx=10, pady=10)
-
-        # TODO: Load generated Gif. Depends on a GIF creation first.
-        # Or maybe just load the first taken picture.
-        file = '/home/bacardi55/Workspace/perso/testtmp' + '/' + 'to_print.gif'
-        c = tk.Canvas(content_frame, height=250, width=300)
-        c.create_image((0, 0), image=tk.PhotoImage(file))
-        c.pack()
 
         # Progress Bar.
         self.progress_value = tk.IntVar()
