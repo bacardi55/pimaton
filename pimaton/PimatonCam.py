@@ -85,6 +85,6 @@ class PimatonCam:
             self.picamera.vflip = config['settings']['vflip']
 
             self.picamera.annotate_text = ''
-            self.picamera.annotate_text_size = 80
+            self.picamera.annotate_text_size = config['settings']['annotate_text_size']
         except Exception as e:
             raise PimatonCamExceptions('Couldnt config picamera: %s' % e)
