@@ -33,7 +33,7 @@ These items might move from one milestone to the other. This list should uptodat
 - ~~v0.0.2 - print capabilities:~~
   - ~~Print picture via cups~~
   - ~~Manage PiCamera configuration~~
-- v0.0.3 - GUI implementation (WIP, you can look at the [dedicated branch](https://git.bacardi55.org/bacardi55/pimaton/src/feature/%238-UI) to see it running (basic workflow works):
+- v0.0.3 - GUI implementation (WIP):
   - Add optional GUI:
       - ~~Implement basic UI with all screens (waiting, processing and thankyou screen)~~
       - ~~Touchscreen input to start process~~
