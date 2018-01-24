@@ -34,16 +34,16 @@ These items might move from one milestone to the other. This list should uptodat
   - ~~Print picture via cups~~
   - ~~Manage PiCamera configuration~~
 - v0.0.3 - GUI implementation (WIP, you can look at the [dedicated branch](https://git.bacardi55.org/bacardi55/pimaton/src/feature/%238-UI) to see it running (basic workflow works):
-  - Add optional GUI
-    - ~~Implement basic UI with all screens (waiting, processing and thankyou screen)~~
-    - ~~Touchscreen input to start process~~
-    - Make it pretty (stuff I don't like/know how to do :P)
-    - Put a picture (either 1st taken pic or an animated gif) on the processing screen
-    - ~~Make all text configurable~~
-    - Implement a "statistics" area in the header (eg: "X pic has been taken since Pimaton starter")
+  - Add optional GUI:
+      - ~~Implement basic UI with all screens (waiting, processing and thankyou screen)~~
+      - ~~Touchscreen input to start process~~
+      - Make it pretty (stuff I don't like/know how to do :P)
+      - Put a picture (either 1st taken pic or an animated gif) on the processing screen
+      - ~~Make all text configurable~~
+      - Implement a "statistics" area in the header (eg: "X pic has been taken since Pimaton starter")
   - ~~Add PiCamera overlay (countdown between pictures)~~
   - ~~Implement multi input in in both TUI and GUI mode~~ (for now: 'keyboard' and/or 'gui' - only 'keyboard' is usable in TUI mode so far)
-  - Create pip package (should be already usable at this stage)
+  - Create pip package (will be usable (in a rough state) when tagging v0.0.3)
 - v0.0.4 - Hardware:
   - Add GPIO input option (might switch to v0.0.4)
   - Camera Flash capability
@@ -66,8 +66,11 @@ So far, the code in that repo can:
 - Generate an image based on the taken pictures (rendered image is configurable but be careful and test the rendering :p)
 - Can use a template image as the base for the rendered picture (to add text or decoration around the thumbnails)
 - Print the image via cups (so a printer needs to be installed)
-- Only CLI mode for now (but GUI work has started)
-- Only Keyboard (TUI) or Touchscreen (GUI) input for now (GPIO and multiple input option coming soon)
+- TUI (=CLI) or GUI mode available. Both are very simple though and nothing fancy yet.
+- Multiple input to start taking pictures:
+    - In TUI: Only Keyboard (Return key)
+    - In GUI: Keyboard (Return key) **and/or** GUI button (can work with a mouse or directly via the Touchscreen if available)
+    - (GPIO option for both TUI and GUI coming soon)
 
 # How to install ?
 
