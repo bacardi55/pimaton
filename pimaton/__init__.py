@@ -8,8 +8,6 @@ from .Pimaton import Pimaton
 from .PimatonCam import PimatonCam
 from .PimatonImage import PimatonImage
 from .PimatonPrint import PimatonPrint
-from .PimatonInput import PimatonInput
-from .PimatonUI import PimatonUI
 from .PimatonTUI import PimatonTUI
 from .PimatonGUI import PimatonGUI
 from .PimatonGUITK import PimatonGUITK

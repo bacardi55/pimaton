@@ -7,7 +7,6 @@ import logging
 from PimatonCam import PimatonCam
 from PimatonImage import PimatonImage
 from PimatonPrint import PimatonPrint
-from PimatonInput import PimatonInput, PimatonInputKeyboard
 from PimatonExceptions import PimatonExceptions, PimatonCamExceptions, PimatonPrintExceptions
 
 logging.basicConfig()
@@ -26,7 +25,6 @@ class Pimaton:
         # Init classes now so it checks the config early.
         self.pimatoncam = PimatonCam(self.config['picamera'])
         self.pimatonimage = PimatonImage(self.config['image'])
-        self.pimatoninput = self.init_input(self.config['input'])
 
         if self.config['print']['enabled'] is True:
             logger.info('**** Pimaton is configured to print images.')
@@ -125,20 +123,6 @@ class Pimaton:
 
         return fpp
 
-    def init_input(self, config):
-        if self.config['input']['type'] == 'keyboard':
-            pimatoninput = PimatonInputKeyboard()
-
-        elif self.config['input']['type'] == 'GPIO':
-            # TODO v0.0.4
-            pimatoninput = PimatonInputGPIO()
-        else:
-            raise PimatonExceptions(
-                'Not recognized input type % s' %
-                self.config['input']['type'])
-
-        return pimatoninput
-
     def get_ui_mode(self):
         return self.config['pimaton']['ui_mode']
 
@@ -150,5 +134,3 @@ class Pimaton:
         return False
 
 
-class PimatonExceptions:
-    pass

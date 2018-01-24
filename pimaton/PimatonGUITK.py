@@ -12,6 +12,7 @@ logger = logging.getLogger("Pimaton")
 class PimatonGUITK(tk.Frame, object):
     def __init__(self, master=None, pimaton=None):
         super(PimatonGUITK, self).__init__(master)
+        self.trigger_locked = True
         self.pimaton = pimaton
         self.config = self.pimaton.config['gui']
         self.parent = master
@@ -32,7 +33,7 @@ class PimatonGUITK(tk.Frame, object):
             'header': self.create_header(),
             'footer': self.create_footer(),
             'screens': {
-                'waiting': WaitingScreen(self, self.config),
+                'waiting': WaitingScreen(self, self.config, self.pimaton.config['pimaton']['inputs']),
                 'processing': ProcessingScreen(self),
                 'thanking': ThankyouScreen(self, self.config)
             }
@@ -41,6 +42,7 @@ class PimatonGUITK(tk.Frame, object):
 
         # Show waiting screen to start with.
         self.ui['screens']['waiting'].show()
+        self.trigger_locked = False
 
     def create_header(self):
         logger.debug('** GUI ** Create gui header area')
@@ -82,7 +84,12 @@ class PimatonGUITK(tk.Frame, object):
         self.clock.after(30000, self.set_clock)
 
     def start_triggered(self):
-        print('Start has been triggered')
+        logger.debug('Start has been triggered')
+        if self.trigger_locked is True:
+            logger.debug('Trigger is locked, please retry later')
+            return
+
+        self.trigger_locked = True
         # Start process screen
         self.init_processing_screen()
         self.run_pimaton()
@@ -107,7 +114,7 @@ class PimatonGUITK(tk.Frame, object):
         to_print = self.pimaton.generate_picture(taken_pictures, filename)
         self.current_step = self.current_step + 1
 
-        time.sleep(1)
+        time.sleep(2)
 
         if self.pimaton.is_print_enabled() is True:
             self.ui['screens']['processing'].set_progress_value(
@@ -118,7 +125,7 @@ class PimatonGUITK(tk.Frame, object):
             self.pimaton.print_picture(to_print)
             self.current_step = self.current_step + 1
 
-            time.sleep(1)
+            time.sleep(2)
 
         # TODO v0.0.5: Sync picture to the internet.
         if self.pimaton.is_sync_enabled():
@@ -134,10 +141,13 @@ class PimatonGUITK(tk.Frame, object):
         # Finished!
         self.ui['screens']['processing'].set_progress_value(100)
         self.ui['screens']['processing'].set_step_value(
-            'Finished! Your photo will be ready soon')
+            'Pimaton process is done!')
         self.update_idletasks()
 
-        time.sleep(1)
+        time.sleep(2)
+
+        # unlock process
+        self.trigger_locked = False
 
     def init_processing_screen(self):
         # Show progress screen.
@@ -179,21 +189,29 @@ class PimatonGUITK(tk.Frame, object):
 
 
 class WaitingScreen(tk.Frame, object):
-    def __init__(self, master=None, config=None):
+    def __init__(self, master=None, config=None, inputs=[]):
         super(WaitingScreen, self).__init__(master)
         self.parent = master
-        self.create_waiting_screen(config['start_btn_txt'])
+        self.create_waiting_screen(config['start_btn_txt'], inputs)
 
-    def create_waiting_screen(self, start_btn_txt):
+    def create_waiting_screen(self, start_btn_txt="", inputs=[]):
         logger.debug('** GUI ** Create waiting screen')
         content_frame = tk.Frame(self)
         content_frame.pack(fill=tk.BOTH, expand=1, padx=10, pady=10)
         button_frame = tk.Frame(content_frame, borderwidth=2)
-        tk.Button(
-            button_frame,
-            text=start_btn_txt,
-            command=self.start_triggered).pack(
-            anchor=tk.CENTER)
+
+        if 'gui' in inputs:
+            tk.Button(
+                button_frame,
+                text=start_btn_txt,
+                command=self.start_triggered).pack(
+                anchor=tk.CENTER)
+        else:
+            tk.Label(
+                button_frame,
+                text=start_btn_txt).pack(
+                anchor=tk.CENTER)
+
         button_frame.place(relx=.5, rely=.5, anchor=tk.CENTER)
 
     def start_triggered(self):

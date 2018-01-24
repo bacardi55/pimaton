@@ -42,7 +42,7 @@ These items might move from one milestone to the other. This list should uptodat
     - ~~Make all text configurable~~
     - Implement a "statistics" area in the header (eg: "X pic has been taken since Pimaton starter")
   - ~~Add PiCamera overlay (countdown between pictures)~~
-  - Implement multi input in in both TUI and GUI mode
+  - ~~Implement multi input in in both TUI and GUI mode~~ (for now: 'keyboard' and/or 'gui' - only 'keyboard' is usable in TUI mode so far)
   - Create pip package (should be already usable at this stage)
 - v0.0.4 - Hardware:
   - Add GPIO input option (might switch to v0.0.4)

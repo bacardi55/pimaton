@@ -39,6 +39,10 @@ pimaton:
     # For the GUI to work, you need X and a desktop manager.
     # Only tui mode is available for now.
     ui_mode: 'tui'
+    inputs:
+        - "keyboard" # React on "enter" key.
+        - "gui" # Only available when ui_mode us GUI.
+        # - GPIO
 
 # This section is only used if pimaton[ui_mode] is set to "gui"
 gui:
@@ -70,14 +74,6 @@ image:
     thumbnails: 
         width: 560
         height: 496
-
-input:
-    # Type can be Keyboard or GPIO.
-    # Keyboard type means waiting for any key to be pressed.
-    type: "keyboard"
-    # Options depends on type.
-    # Type: Keyboard doesn't have any options as it just wait for any key to be pressed.
-    # options:
 
 print:
     # If pimaton should try to print the generated picture.
