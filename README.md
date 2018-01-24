@@ -40,7 +40,7 @@ These items might move from one milestone to the other. This list should uptodat
       - Make it pretty (stuff I don't like/know how to do :P)
       - Put a picture (either 1st taken pic or an animated gif) on the processing screen
       - ~~Make all text configurable~~
-      - Implement a "statistics" area in the header (eg: "X pic has been taken since Pimaton starter")
+      - ~~Implement a "statistics" area in the header (eg: "X pic has been taken since Pimaton starter")~~
   - ~~Add PiCamera overlay (countdown between pictures)~~
   - ~~Implement multi input in in both TUI and GUI mode~~ (for now: 'keyboard' and/or 'gui' - only 'keyboard' is usable in TUI mode so far)
   - Create pip package (will be usable (in a rough state) when tagging v0.0.3)
