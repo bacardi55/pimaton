@@ -48,7 +48,7 @@ class PimatonCam:
 
     def countdown(self, sec):
         for i in range(0, sec):
-            self.picamera.annotate_text =  str(sec - i)
+            self.picamera.annotate_text = str(sec - i)
             sleep(1)
         self.picamera.annotate_text = ''
 

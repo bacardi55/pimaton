@@ -132,5 +132,3 @@ class Pimaton:
     def is_sync_enabled(self):
         # Not implemented yet.
         return False
-
-

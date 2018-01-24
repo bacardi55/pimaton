@@ -33,11 +33,14 @@ class PimatonGUITK(tk.Frame, object):
             'header': self.create_header(),
             'footer': self.create_footer(),
             'screens': {
-                'waiting': WaitingScreen(self, self.config, self.pimaton.config['pimaton']['inputs']),
+                'waiting': WaitingScreen(
+                    self,
+                    self.config,
+                    self.pimaton.config['pimaton']['inputs']),
                 'processing': ProcessingScreen(self),
-                'thanking': ThankyouScreen(self, self.config)
-            }
-        }
+                'thanking': ThankyouScreen(
+                    self,
+                    self.config)}}
         logger.debug('** GUI ** All screens have been initiated')
 
         # Show waiting screen to start with.
@@ -58,7 +61,10 @@ class PimatonGUITK(tk.Frame, object):
             text="STATISTIQUES").pack(
             side=tk.RIGHT,
             anchor="ne")
-        tk.Label(header_frame, text=self.config['header_message']).pack(side=tk.TOP)
+        tk.Label(
+            header_frame,
+            text=self.config['header_message']).pack(
+            side=tk.TOP)
 
         return header_frame
 
