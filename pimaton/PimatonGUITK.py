@@ -13,9 +13,12 @@ class PimatonGUITK(tk.Frame, object):
     def __init__(self, master=None, pimaton=None):
         super(PimatonGUITK, self).__init__(master)
         self.trigger_locked = True
+        self.cptr = 0
+        self.start_time = datetime.datetime.now()
         self.pimaton = pimaton
         self.config = self.pimaton.config['gui']
         self.parent = master
+
         self.pack(fill=tk.BOTH, expand=1)
 
         self.nb_steps = self.get_step_number()
@@ -55,12 +58,10 @@ class PimatonGUITK(tk.Frame, object):
         self.current_time = datetime.datetime.now().strftime('%H:%M')
         self.clock = tk.Label(header_frame, text=self.current_time)
         self.clock.pack(side=tk.LEFT, anchor="nw")
-        # TODO: configurable + TODO.
-        tk.Label(
+        self.stats = tk.Label(
             header_frame,
-            text="STATISTIQUES").pack(
-            side=tk.RIGHT,
-            anchor="ne")
+            text=self.get_stats_text())
+        self.stats.pack(side=tk.RIGHT, anchor="ne")
         tk.Label(
             header_frame,
             text=self.config['header_message']).pack(
@@ -88,6 +89,10 @@ class PimatonGUITK(tk.Frame, object):
         self.current_time = datetime.datetime.now().strftime('%H:%M')
         self.clock.config(text=self.current_time)
         self.clock.after(30000, self.set_clock)
+
+    def set_stats_area(self):
+        self.stats.config(text=self.get_stats_text())
+        self.stats.after(30000, self.set_stats_area)
 
     def start_triggered(self):
         logger.debug('Start has been triggered')
@@ -153,6 +158,7 @@ class PimatonGUITK(tk.Frame, object):
         time.sleep(2)
 
         # unlock process
+        self.cptr = self.cptr + 1
         self.trigger_locked = False
 
     def init_processing_screen(self):
@@ -189,8 +195,13 @@ class PimatonGUITK(tk.Frame, object):
         self.ui['screens']['waiting'].show()
         self.update_idletasks()
 
+    def get_stats_text(self):
+        # TODO: Manage hours if minute > 60
+        return str(self.cptr * int(self.pimaton.config['picamera']['number_of_pictures_to_take'])) + ' pictures taken since ' + str((datetime.datetime.now() - self.start_time).seconds/60) + ' minutes'
+
     def mainloop(self):
         self.set_clock()
+        self.set_stats_area()
         super(PimatonGUITK, self).mainloop()
 
 
