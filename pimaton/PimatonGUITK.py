@@ -4,6 +4,7 @@ import ttk as ttk
 import datetime
 import time
 import logging
+import math
 
 logging.basicConfig()
 logger = logging.getLogger("Pimaton")
@@ -111,6 +112,8 @@ class PimatonGUITK(tk.Frame, object):
         self.switch_to_waiting_screen()
 
     def run_pimaton(self):
+        # Reset current step.
+        self.current_step = 0
         unique_key = self.pimaton.get_unique_key()
         time.sleep(1)
         taken_pictures = self.pimaton.take_pictures(unique_key)
@@ -197,7 +200,16 @@ class PimatonGUITK(tk.Frame, object):
 
     def get_stats_text(self):
         # TODO: Manage hours if minute > 60
-        return str(self.cptr * int(self.pimaton.config['picamera']['number_of_pictures_to_take'])) + ' pictures taken since ' + str((datetime.datetime.now() - self.start_time).seconds/60) + ' minutes'
+        text = str(self.cptr * int(self.pimaton.config['picamera']['number_of_pictures_to_take'])) + \
+            ' pictures taken since '
+
+        minutes = int(math.floor((datetime.datetime.now() - self.start_time).seconds / 60))
+        if minutes > 59:
+            hours = int(math.floor(minutes / 60))
+            minutes = minutes % 60
+            text = text + str(hours) + ' h' + str(minutes) + ' m'
+        else:
+            text = text + minutes + 'min'
 
     def mainloop(self):
         self.set_clock()
@@ -263,7 +275,7 @@ class ProcessingScreen(tk.Frame, object):
             padx=20,
             pady=20,
             anchor=tk.CENTER)
-        pb = ttk.Progressbar(
+        ttk.Progressbar(
             progress_frame,
             variable=self.progress_value).pack(
             fill=tk.X,
