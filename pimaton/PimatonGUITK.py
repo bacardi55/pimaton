@@ -1,5 +1,6 @@
 import Tkinter as tk
 import ttk as ttk
+import tkFont as tkf
 
 import datetime
 import time
@@ -28,7 +29,16 @@ class PimatonGUITK(tk.Frame, object):
         logger.debug('** GUI ** Progress_inc = %s' % self.progress_inc)
         self.current_step = 0
 
+        self.set_fonts()
         self.initialize_ui()
+
+    def set_fonts(self):
+        self.fonts = {
+            'small': tkf.Font(size=6),
+            'normal': tkf.Font(size=8),
+            'normalbold': tkf.Font(size=8, weight="bold"),
+            'large': tkf.Font(size=16)
+        }
 
     def initialize_ui(self):
         logger.debug('** GUI ** INIT UI')
@@ -57,15 +67,17 @@ class PimatonGUITK(tk.Frame, object):
         header_frame.pack(expand=0, fill=tk.X, side=tk.TOP, padx=10, pady=10)
 
         self.current_time = datetime.datetime.now().strftime('%H:%M')
-        self.clock = tk.Label(header_frame, text=self.current_time)
+        self.clock = tk.Label(header_frame, text=self.current_time, font=self.fonts['normal'])
         self.clock.pack(side=tk.LEFT, anchor="nw")
         self.stats = tk.Label(
             header_frame,
-            text=self.get_stats_text())
+            text=self.get_stats_text(),
+            font=self.fonts['small'])
         self.stats.pack(side=tk.RIGHT, anchor="ne")
         tk.Label(
             header_frame,
-            text=self.config['header_message']).pack(
+            text=self.config['header_message'],
+            font=self.fonts['normalbold']).pack(
             side=tk.TOP)
 
         return header_frame
@@ -81,7 +93,8 @@ class PimatonGUITK(tk.Frame, object):
             pady=10)
         tk.Label(
             footer_frame,
-            text=self.config['footer_message']).pack(
+            text=self.config['footer_message'],
+            font=self.fonts['normal']).pack(
             anchor=tk.CENTER)
 
         return footer_frame
@@ -115,7 +128,7 @@ class PimatonGUITK(tk.Frame, object):
         # Reset current step.
         self.current_step = 0
         unique_key = self.pimaton.get_unique_key()
-        time.sleep(1)
+        time.sleep(self.config['time_between_steps'])
         taken_pictures = self.pimaton.take_pictures(unique_key)
 
         # After run, you got the generated file.
@@ -128,7 +141,7 @@ class PimatonGUITK(tk.Frame, object):
         to_print = self.pimaton.generate_picture(taken_pictures, filename)
         self.current_step = self.current_step + 1
 
-        time.sleep(2)
+        time.sleep(self.config['time_between_steps'])
 
         if self.pimaton.is_print_enabled() is True:
             self.ui['screens']['processing'].set_progress_value(
@@ -139,7 +152,7 @@ class PimatonGUITK(tk.Frame, object):
             self.pimaton.print_picture(to_print)
             self.current_step = self.current_step + 1
 
-            time.sleep(2)
+        time.sleep(self.config['time_between_steps'])
 
         # TODO v0.0.5: Sync picture to the internet.
         if self.pimaton.is_sync_enabled():
@@ -150,7 +163,7 @@ class PimatonGUITK(tk.Frame, object):
             self.update_idletasks()
             self.current_step = self.current_step + 1
 
-            time.sleep(1)
+        time.sleep(self.config['time_between_steps'])
 
         # Finished!
         self.ui['screens']['processing'].set_progress_value(100)
@@ -158,7 +171,7 @@ class PimatonGUITK(tk.Frame, object):
             'Pimaton process is done!')
         self.update_idletasks()
 
-        time.sleep(2)
+        time.sleep(self.config['time_between_steps'])
 
         # unlock process
         self.cptr = self.cptr + 1
@@ -199,9 +212,9 @@ class PimatonGUITK(tk.Frame, object):
         self.update_idletasks()
 
     def get_stats_text(self):
-        # TODO: Manage hours if minute > 60
-        text = str(self.cptr * int(self.pimaton.config['picamera']['number_of_pictures_to_take'])) + \
-            ' pictures taken since '
+        text = 'Taken pictues: ' + \
+            str(self.cptr * int(self.pimaton.config['picamera']['number_of_pictures_to_take'])) + \
+            "\nSince: "
 
         minutes = int(math.floor((datetime.datetime.now() - self.start_time).seconds / 60))
         if minutes > 59:
@@ -209,7 +222,9 @@ class PimatonGUITK(tk.Frame, object):
             minutes = minutes % 60
             text = text + str(hours) + ' h' + str(minutes) + ' m'
         else:
-            text = text + minutes + 'min'
+            text = text + str(minutes) + 'min'
+
+        return text
 
     def mainloop(self):
         self.set_clock()
@@ -233,11 +248,13 @@ class WaitingScreen(tk.Frame, object):
             tk.Button(
                 button_frame,
                 text=start_btn_txt,
+                font=self.parent.fonts['large'],
                 command=self.start_triggered).pack(
                 anchor=tk.CENTER)
         else:
             tk.Label(
                 button_frame,
+                font=self.parent.fonts['large'],
                 text=start_btn_txt).pack(
                 anchor=tk.CENTER)
 
@@ -321,7 +338,8 @@ class ThankyouScreen(tk.Frame, object):
 
         tk.Label(
             content_frame,
-            text=thankyou_message).pack(
+            text=thankyou_message,
+            font=self.parent.fonts['large']).pack(
             fill=tk.BOTH)
 
     def hide(self):

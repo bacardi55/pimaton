@@ -1,7 +1,7 @@
 ---
 
 # PiCamera options.
-picamera: 
+picamera:
     # Where to store taken pictures.
     photo_directory: "/home/pi/pimaton_pictures"
     number_of_pictures_to_take: 6
@@ -13,7 +13,7 @@ picamera:
     # For more information, see the PiCamera class here:
     # https://picamera.readthedocs.io/en/latest/api_camera.html
     settings:
-        resolution: 
+        resolution:
             width: 560
             height: 496
         framerate: 30
@@ -33,7 +33,7 @@ picamera:
         annotate_text_size: 80
 
 # Pimaton global options.
-pimaton: 
+pimaton:
     time_between_loop: 2
     # UI mode, can be tui (Text user interface) or GUI (graphical user interface)
     # For the GUI to work, you need X and a desktop manager.
@@ -52,6 +52,7 @@ gui:
     thankyou_message: "Thanks for using Pimaton, your picture should be ready!"
     time_between_processing_and_thankyou_screen: 5
     time_between_thankyou_and_waiting: 5
+    time_between_steps: 2
 
 # Image options.
 image:
@@ -71,7 +72,7 @@ image:
         cols: 2
 
     # Thumbnails size.
-    thumbnails: 
+    thumbnails:
         width: 560
         height: 496
 
