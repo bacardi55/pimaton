@@ -50,7 +50,7 @@ gui:
     footer_message: "All pictures will be saved and sent to the newly wed, be careful ;)"
     start_btn_txt: "Let's roll!"
     thankyou_message: "Thanks for using Pimaton, your picture should be ready!"
-    time_between_processing_and_thankyou_screen: 5
+    time_between_processing_and_thankyou_screen: 2
     time_between_thankyou_and_waiting: 5
     time_between_steps: 2
 

@@ -7,6 +7,8 @@ import time
 import logging
 import math
 
+from PIL import Image, ImageTk
+
 logging.basicConfig()
 logger = logging.getLogger("Pimaton")
 
@@ -37,7 +39,7 @@ class PimatonGUITK(tk.Frame, object):
             'small': tkf.Font(size=6),
             'normal': tkf.Font(size=8),
             'normalbold': tkf.Font(size=8, weight="bold"),
-            'large': tkf.Font(size=16)
+            'large': tkf.Font(size=18, weight="bold")
         }
 
     def initialize_ui(self):
@@ -126,17 +128,22 @@ class PimatonGUITK(tk.Frame, object):
 
     def run_pimaton(self):
         # Reset current step.
-        self.current_step = 0
+        self.current_step = 1
         unique_key = self.pimaton.get_unique_key()
         time.sleep(self.config['time_between_steps'])
         taken_pictures = self.pimaton.take_pictures(unique_key)
 
         # After run, you got the generated file.
+        # Place an image on the screen.
+        self.ui['screens']['processing'].set_canvas_image(taken_pictures[self.current_step-1])
+        # Update progress on statusbar.
         self.ui['screens']['processing'].set_progress_value(
             self.current_step * self.progress_inc)
+        # Update progress on statusbar text.
         self.ui['screens']['processing'].set_step_value(
             'Step ' + str(self.current_step) + '/' + str(self.nb_steps) + ': Generating picture to print')
         self.update_idletasks()
+
         filename = self.pimaton.get_filename(unique_key)
         to_print = self.pimaton.generate_picture(taken_pictures, filename)
         self.current_step = self.current_step + 1
@@ -144,6 +151,7 @@ class PimatonGUITK(tk.Frame, object):
         time.sleep(self.config['time_between_steps'])
 
         if self.pimaton.is_print_enabled() is True:
+            self.ui['screens']['processing'].set_canvas_image(taken_pictures[self.current_step-1])
             self.ui['screens']['processing'].set_progress_value(
                 self.current_step * self.progress_inc)
             self.ui['screens']['processing'].set_step_value(
@@ -156,6 +164,7 @@ class PimatonGUITK(tk.Frame, object):
 
         # TODO v0.0.5: Sync picture to the internet.
         if self.pimaton.is_sync_enabled():
+            self.ui['screens']['processing'].set_canvas_image(taken_pictures[self.current_step-1])
             self.ui['screens']['processing'].set_progress_value(
                 self.current_step * self.progress_inc)
             self.ui['screens']['processing'].set_step_value(
@@ -166,6 +175,7 @@ class PimatonGUITK(tk.Frame, object):
         time.sleep(self.config['time_between_steps'])
 
         # Finished!
+        self.ui['screens']['processing'].set_canvas_image(taken_pictures[self.current_step-1])
         self.ui['screens']['processing'].set_progress_value(100)
         self.ui['screens']['processing'].set_step_value(
             'Pimaton process is done!')
@@ -275,6 +285,7 @@ class ProcessingScreen(tk.Frame, object):
     def __init__(self, master=None):
         super(ProcessingScreen, self).__init__(master)
         self.parent = master
+        self.size = (512, 384)
         self.create_processing_screen()
 
     def create_processing_screen(self):
@@ -291,7 +302,8 @@ class ProcessingScreen(tk.Frame, object):
             expand=0,
             padx=20,
             pady=20,
-            anchor=tk.CENTER)
+            anchor=tk.CENTER,
+            side=tk.BOTTOM)
         ttk.Progressbar(
             progress_frame,
             variable=self.progress_value).pack(
@@ -303,7 +315,12 @@ class ProcessingScreen(tk.Frame, object):
         self.steptxt.set("Step 0/" +
                          str(self.parent.nb_steps) +
                          ": Waiting to start...")
-        tk.Label(progress_frame, textvariable=self.steptxt).pack()
+        tk.Label(progress_frame, textvariable=self.steptxt, font=self.parent.fonts['normal']).pack()
+
+        # Canvas to display taken pictures.
+        self.canvas = tk.Canvas(content_frame, height=384, width=512)
+        self.init_canvas_image()
+        self.canvas.pack(side=tk.TOP)
 
     def hide(self):
         self.pack_forget()
@@ -316,6 +333,20 @@ class ProcessingScreen(tk.Frame, object):
 
     def set_step_value(self, value=''):
         self.steptxt.set(value)
+
+    def init_canvas_image(self):
+        pilimage = Image.new('RGB', self.size, 'white')
+        self.image = ImageTk.PhotoImage(pilimage)
+        self.imagesprite = self.canvas.create_image(250,100, image=self.image)
+
+    def set_canvas_image(self, filename):
+        filename_path = self.parent.pimaton.config['picamera']['photo_directory'] + '/' + filename
+        pilimage = Image.open(filename_path)
+        pilimage.thumbnail(self.size)
+        new_image = ImageTk.PhotoImage(pilimage)
+        self.imagesprite = self.canvas.create_image(250,100, image=new_image)
+        self.canvas.itemconfig(self.image, image=new_image)
+        self.image = new_image
 
     def clean_process_screen(self):
         self.set_progress_value(0)
