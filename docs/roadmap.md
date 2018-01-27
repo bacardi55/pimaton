@@ -1,0 +1,35 @@
+## Roadmap
+
+- ~~v0.0.1 - core feature:~~
+  - ~~Core architecture.~~
+  - ~~Yaml configuration import~~
+  - ~~Take configurable pictures via picamera.~~
+  - ~~Generate an configurable image with the taken picture and an optional template.~~
+  - ~~Keyboard input to start process~~
+- ~~v0.0.2 - print capabilities:~~
+  - ~~Print picture via cups~~
+  - ~~Manage PiCamera configuration~~
+- v0.0.3 - GUI implementation (WIP):
+  - ~~Add optional GUI~~:
+      - ~~Implement basic UI with all screens (waiting, processing and thankyou screen)~~
+      - ~~Touchscreen input to start process~~
+      - ~~Make it pretty (stuff I don't like/know how to do :P)~~
+      - ~~Put a picture (either 1st taken pic or an animated gif) on the processing screen~~
+      - ~~Make all text configurable~~
+      - ~~Implement a "statistics" area in the header (eg: "X pic has been taken since Pimaton starter")~~
+  - ~~Add PiCamera overlay (countdown between pictures)~~
+  - ~~Implement multi input in in both TUI and GUI mode~~ (for now: 'keyboard' and/or 'gui' - only 'keyboard' is usable in TUI mode so far)
+  - ~~Add a command to generate the template file to facilitate user to personalize it~~
+  - Create pip package (will be usable (in a rough state) when tagging v0.0.3)
+- v0.0.4 - Hardware (Might become v0.0.5):
+  - Add GPIO input option
+  - Camera Flash capability
+- v0.0.5 - Web (might become v0.0.4):
+  - Sync
+  - email
+- Unplanned:
+  - Translations
+  - Additional GUI options: enable/disable flash
+  - See slideshow of picture (either via button on GUI or as screensaver)
+  - Server + photo gallery web application (+ QR link compatible)
+  - QR code link

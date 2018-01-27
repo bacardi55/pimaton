@@ -78,7 +78,7 @@ image:
 
 print:
     # If pimaton should try to print the generated picture.
-    enabled: true
+    enabled: false
     # The rest of the options are only needed if pimaton[enable_print] is True.
     user: 'pi'
     printer_key: 0
