@@ -1,12 +1,18 @@
-from picamera import PiCamera
 from time import sleep, strftime
 import datetime
 import logging
 
-from PimatonExceptions import PimatonCamExceptions
-
 logging.basicConfig()
 logger = logging.getLogger("Pimaton")
+
+try:
+    from picamera import PiCamera
+    lib_exists = True
+except Exception as e:
+    logger.debug('error loading PiCamera: %s' % e)
+    lib_exists = False
+
+from PimatonExceptions import PimatonCamExceptions
 
 
 class PimatonCam:
@@ -16,9 +22,12 @@ class PimatonCam:
 
     def __init__(self, config):
         logger.debug('Instanciating PimatonCam with config %s' % config)
-        self.picamera = PiCamera()
-        self.config_picamera(config)
         self.config = config
+        if lib_exists is True:
+            self.picamera = PiCamera()
+            self.config_picamera(config)
+        else:
+            logger.debug('PiCamera module unavailable, aborting PimatonCam instantiation.')
 
     def take_pictures(self, unique_key):
         """
