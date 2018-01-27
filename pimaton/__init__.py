@@ -37,6 +37,10 @@ def main():
         logger.info('*** Pimaton is loading... ***')
         pimaton = Pimaton(args.config_file)
 
+        if args.generate_template is True:
+            pimaton.generate_template()
+            sys.exit(0)
+
         logger.info('*** Loading UI... ***')
         mode = pimaton.get_ui_mode()
         if mode == 'tui':
@@ -54,7 +58,6 @@ def main():
         logger.critical('An error occured: %s' % e)
         sys.exit(1)
 
-
 def retrieve_arguments(args):
     parser = argparse.ArgumentParser(description='Pimaton.')
     parser.add_argument("--debug", action='store_true',
@@ -62,6 +65,10 @@ def retrieve_arguments(args):
     parser.add_argument(
         "--config-file",
         help="Full path of the config file to load")
+    parser.add_argument('--generate-template',
+                        action="store_true",
+                        help="Generate a template image based on PiCamera configuration")
+
     parser.add_argument('-v', '--version', help="Display Pimaton version",
                         action='version', version='Pimaton ' + version_str)
 

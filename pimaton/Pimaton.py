@@ -132,3 +132,6 @@ class Pimaton:
     def is_sync_enabled(self):
         # Not implemented yet.
         return False
+
+    def generate_template(self):
+        self.pimatonimage.generate_template_file(self.config['image'])

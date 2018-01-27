@@ -21,6 +21,7 @@ class PimatonImage(with_metaclass(Singleton, object)):
 
     def __init__(self, config):
         logger.debug('Instantiate PimatonImage with config = %s' % config)
+        self.config = config
         self.dimensions = self.__calculate_dimensions(config)
 
     def render_image_to_print(self, taken_pictures, filename, config):
@@ -58,20 +59,12 @@ class PimatonImage(with_metaclass(Singleton, object)):
             positions = self.__get_positions(idx, config, self.dimensions)
             generated.paste(thumbnail, positions)
 
-            # TODO: TMP code to be removed.
-            tmp = ImageDraw.Draw(generated)
-            tmp.rectangle([positions, (positions[0] +
-                                       config['thumbnails']['width'], positions[1] +
-                                       config['thumbnails']['height'])], outline="black")
-
         generated.save(
             config['print_pic']['output_dir'] +
             '/' +
             filename,
             'JPEG')
         logger.debug('Final picture has been generated')
-        # TODO: return generated image or name ? Will see what PimatonPrint
-        # need later on.
 
     def __calculate_dimensions(self, config):
         """
@@ -128,3 +121,17 @@ class PimatonImage(with_metaclass(Singleton, object)):
             (current_row - 1) * config['thumbnails']['height'])
 
         return (x_position, y_position)
+
+    def generate_template_file(self, config):
+        logger.debug('Generating template file')
+        generated = self.__create_new_image(
+            self.dimensions['print_pic_size'])
+
+        for idx in range(config['print_pic']['rows'] * config['print_pic']['cols']):
+            positions = self.__get_positions(idx, config, self.dimensions)
+            tmp = ImageDraw.Draw(generated)
+            tmp.rectangle([positions, (positions[0] +
+                                        config['thumbnails']['width'], positions[1] +
+                                        config['thumbnails']['height'])], outline="black")
+        generated.save('pimaton_template.jpg' , 'JPEG')
+        logger.info('Template file has been generated here: ./pimaton_template.jpg')
