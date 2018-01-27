@@ -34,20 +34,20 @@ These items might move from one milestone to the other. This list should uptodat
   - ~~Print picture via cups~~
   - ~~Manage PiCamera configuration~~
 - v0.0.3 - GUI implementation (WIP):
-  - Add optional GUI:
+  - ~~Add optional GUI~~:
       - ~~Implement basic UI with all screens (waiting, processing and thankyou screen)~~
       - ~~Touchscreen input to start process~~
-      - Make it pretty (stuff I don't like/know how to do :P)
-      - Put a picture (either 1st taken pic or an animated gif) on the processing screen
+      - ~~Make it pretty (stuff I don't like/know how to do :P)~~
+      - ~~Put a picture (either 1st taken pic or an animated gif) on the processing screen~~
       - ~~Make all text configurable~~
       - ~~Implement a "statistics" area in the header (eg: "X pic has been taken since Pimaton starter")~~
   - ~~Add PiCamera overlay (countdown between pictures)~~
   - ~~Implement multi input in in both TUI and GUI mode~~ (for now: 'keyboard' and/or 'gui' - only 'keyboard' is usable in TUI mode so far)
   - Create pip package (will be usable (in a rough state) when tagging v0.0.3)
-- v0.0.4 - Hardware:
-  - Add GPIO input option (might switch to v0.0.4)
+- v0.0.4 - Hardware (Might become v0.0.5):
+  - Add GPIO input option
   - Camera Flash capability
-- v0.0.5 - Web:
+- v0.0.5 - Web (might become v0.0.5):
   - Sync
   - email
 - v0.0.6 Main options:
