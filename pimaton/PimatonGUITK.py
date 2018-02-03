@@ -177,6 +177,7 @@ class PimatonGUITK(tk.Frame, object):
                 'Step ' + str(self.current_step) + '/' + str(self.nb_steps) + ': Syncing picture to the internet')
             self.update_idletasks()
             self.current_step = self.current_step + 1
+            self.pimaton.sync_pictures()
 
         time.sleep(self.config['time_between_steps'])
 

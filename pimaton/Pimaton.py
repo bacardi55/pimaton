@@ -3,6 +3,7 @@ from time import time, sleep
 import yaml
 import datetime
 import logging
+import os
 
 from PimatonCam import PimatonCam
 from PimatonImage import PimatonImage
@@ -87,6 +88,10 @@ class Pimaton:
         else:
             logger.debug('Print is disable, skipping')
 
+    def sync_pictures(self):
+        cmd = "rsync -azP " + self.config['sync']['source'] + " " + self.config['sync']['destination']
+        os.system(cmd)
+
     def wait_before_next_iteration(self):
         logger.debug(
             'Sleeping %s second' %
@@ -130,8 +135,7 @@ class Pimaton:
         return self.config['print']['enabled']
 
     def is_sync_enabled(self):
-        # Not implemented yet.
-        return False
+        return self.config['sync']['enabled']
 
     def generate_template(self):
         self.pimatonimage.generate_template_file(self.config['image'])
