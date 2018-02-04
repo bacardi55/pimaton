@@ -8,7 +8,7 @@ import os
 from PimatonCam import PimatonCam
 from PimatonImage import PimatonImage
 from PimatonPrint import PimatonPrint
-from PimatonExceptions import PimatonExceptions, PimatonCamExceptions, PimatonPrintExceptions
+from PimatonExceptions import PimatonExceptions, PimatonCamExceptions, PimatonPrintExceptions, PimatonSyncExceptions
 
 logging.basicConfig()
 logger = logging.getLogger("Pimaton")
@@ -90,7 +90,10 @@ class Pimaton:
 
     def sync_pictures(self):
         cmd = "rsync -azP " + self.config['sync']['source'] + " " + self.config['sync']['destination']
-        os.system(cmd)
+        try:
+            os.system(cmd)
+        except Exception as e:
+            raise PimatonSyncExceptions('Couldnt sync pictures: %s' % e)
 
     def wait_before_next_iteration(self):
         logger.debug(
