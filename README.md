@@ -12,7 +12,7 @@ The principle is simple, it takes picture when triggered (configurable number), 
 
 
 If you want an idea of what it looks like when running, click on the image below:
-[![QUICK DEMO](https://img.youtube.com/vi/HJ43O-nPQzw/0.jp://img.youtube.com/vi/HJ43O-nPQzw/0.jpg)](https://www.youtube.com/watch?v=HJ43O-nPQzw)
+[![QUICK DEMO](https://img.youtube.com/vi/HJ43O-nPQzw/0.jpg)](https://www.youtube.com/watch?v=HJ43O-nPQzw)
 
 The booth is not mounted yet, but gives an idea of the application running and the speed to generate/print the image.
 
