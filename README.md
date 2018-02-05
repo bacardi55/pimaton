@@ -53,13 +53,15 @@ sudo apt install python-tk python-pil.imagetk
 
 ### Automated via Pip
 
+(This is my first Pypi package, hope it works fine :D)
+
 ```bash
 pip install pimaton
 ```
 
 ### Manual installation
 
-Assuming here you have a working installation with python2 and pip.
+Assuming here you have a working installation with python2.
 
 Install the python extension (will be automated via pip later)
 
@@ -80,6 +82,14 @@ python pimaton.py # see Usage section for more example.
 ```
 
 ## Configuration
+
+Copy the default configuration file to your workspace:
+
+```bash
+cp /usr/local/lib/python2.7/dist-packages/pimaton/assets/default_config.yaml /path/to/myconfig.yaml
+```
+
+Then edit it as you wish, but be careful with what you modify :). Hope the comments in the file are enough.
 
 [See the dedicated page for the configuration](docs/configuration.md)
 
@@ -106,9 +116,9 @@ optional arguments:
 To use Pimaton:
 
 ```bash
-python pimaton.py --config-dir=/path/to/config_file.yaml # Run pymathon with given config file - should be the "production mode" command.
+python pimaton.py --config-dir=/path/to/myconfig.yaml # Run pymathon with given config file - should be the "production mode" command.
 python pimaton.py --debug # Display all debug messages and use default config file.
-python pimaton.py --debug --config-file=/path/to/config_file.yml # Display all debug messages and use custom config file.
+python pimaton.py --debug --config-file=/path/to/myconfig.yaml # Display all debug messages and use custom config file.
 ```
 
 To generate a template file (empty based image with placeholder for thumbnails like [this example](docs/assets/pimaton_template.jpg):
@@ -127,26 +137,15 @@ python pimaton.py --debug --config-file=/path/to/config_file.yaml --generate-tem
 
 The next planned item are:
 
-- ~~v0.0.1 - core feature:~~
-- ~~v0.0.2 - print capabilities:~~
-- v0.0.3 - GUI implementation (WIP):
-  - ~~Add optional GUI~~:
-      - ~~Implement basic UI with all screens (waiting, processing and thankyou screen)~~
-      - ~~Touchscreen input to start process~~
-      - ~~Make it pretty (stuff I don't like/know how to do :P)~~
-      - ~~Put a picture (either 1st taken pic or an animated gif) on the processing screen~~
-      - ~~Make all text configurable~~
-      - ~~Implement a "statistics" area in the header (eg: "X pic has been taken since Pimaton starter")~~
-  - ~~Add PiCamera overlay (countdown between pictures)~~
-  - ~~Implement multi input in in both TUI and GUI mode~~ (for now: 'keyboard' and/or 'gui' - only 'keyboard' is usable in TUI mode so far)
-  - ~~Add a command to generate the template file to facilitate user to personalize it~~
-  - Create pip package (will be usable (in a rough state) when tagging v0.0.3)
-- v0.0.4 - Hardware (Might become v0.0.5):
-  - Add GPIO input option
-  - Camera Flash capability
-- v0.0.5 - Web (might become v0.0.4):
+- ~~[v0.0.1 - core feature](docs/roadmap.md):~~
+- ~~[v0.0.2 - print capabilities](docs/roadmap.md):~~
+- ~~[v0.0.3 - GUI implementation (WIP)](docs/roadmap.md):~~
+- v0.0.4 - Web:
   - Sync
   - email
+- v0.0.5 - Hardware:
+  - Add GPIO input option
+  - Camera Flash capability
 
 You can find the [full roadmap here](docs/roadmap.md)
 

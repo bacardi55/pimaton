@@ -9,7 +9,7 @@
 - ~~v0.0.2 - print capabilities:~~
   - ~~Print picture via cups~~
   - ~~Manage PiCamera configuration~~
-- v0.0.3 - GUI implementation (WIP):
+- ~~v0.0.3 - GUI implementation:~~
   - ~~Add optional GUI~~:
       - ~~Implement basic UI with all screens (waiting, processing and thankyou screen)~~
       - ~~Touchscreen input to start process~~
@@ -20,13 +20,13 @@
   - ~~Add PiCamera overlay (countdown between pictures)~~
   - ~~Implement multi input in in both TUI and GUI mode~~ (for now: 'keyboard' and/or 'gui' - only 'keyboard' is usable in TUI mode so far)
   - ~~Add a command to generate the template file to facilitate user to personalize it~~
-  - Create pip package (will be usable (in a rough state) when tagging v0.0.3)
-- v0.0.4 - Hardware (Might become v0.0.5):
-  - Add GPIO input option
-  - Camera Flash capability
-- v0.0.5 - Web (might become v0.0.4):
+  - ~~Create pip package (will be usable (in a rough state) when tagging v0.0.3)~~
+- v0.0.4 - Web (WIP):
   - Sync
   - email
+- v0.0.5 - Hardware:
+  - Add GPIO input option
+  - Camera Flash capability
 - Unplanned:
   - Translations
   - Additional GUI options: enable/disable flash
