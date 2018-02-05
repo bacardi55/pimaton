@@ -18,7 +18,7 @@ The booth is not mounted yet, but gives an idea of the application running and t
 
 The main goals of Pimaton are:
 - To be simple and instable quickly on a raspberrypi (goal is to be installable via Pip soon)
-- To be configurable ([check the config file](assets/default_config.yaml) to see all options
+- To be configurable ([check the config file](pimaton/assets/default_config.yaml) to see all options
   - Options include (but not limited to), number of picture taken, size of thumbnails and their layout on printed image. A background/template image can be used to customize the final image.
   - A command is included to generate a blank template with placeholder for the future image to facilitate template creation. See [example](docs/assets/pimaton_template.jpg)
 - To run either on CLI (still with camera preview thanks to PiCamera) or via a GUI (if X installed, will run a TK app in fullscreen mode)
