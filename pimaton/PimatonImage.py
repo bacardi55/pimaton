@@ -39,8 +39,8 @@ class PimatonImage(with_metaclass(Singleton, object)):
             im.thumbnail(self.dimensions['thumbnail_size'])
             thumbnails.append(im)
 
-        if config['print_pic']['template'] is not None or len(
-                config['print_pic']['template']) == 0:
+        if config['print_pic']['template'] is not None and len(
+                config['print_pic']['template']) > 0:
             logger.debug(
                 "Loading template file: %s" %
                 config['print_pic']['template'])
