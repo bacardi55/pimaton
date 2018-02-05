@@ -26,4 +26,5 @@ setup(name='pimaton',
       entry_points = {
           'console_scripts': ['pimaton=pimaton:main']
       },
+      include_package_data=True,
       zip_safe=False)
