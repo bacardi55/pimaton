@@ -42,9 +42,20 @@ So far, the code in that repo can:
 
 ## Installation
 
+Install dependencies:
+
+```bash
+sudo apt install python-pip libjpeg-dev
+pip install -U pip
+# To enable GUI:
+sudo apt install python-tk python-pil.imagetk
+```
+
 ### Automated via Pip
 
-Coming soon.
+```bash
+pip install pimaton
+```
 
 ### Manual installation
 
@@ -57,8 +68,6 @@ Install the python extension (will be automated via pip later)
 pip install picamera six pyyaml pillow
 # To be able to print:
 pip install pycups
-# To enable GUI:
-sudo apt install python-tk python-pil.imagetk
 ```
 
 Clone the repository and go into the download directory, eg:
@@ -66,6 +75,8 @@ Clone the repository and go into the download directory, eg:
 ``` bash
 git clone https://git.bacardi55.org/bacardi55/pimaton.git
 cd pimaton
+# Run pimaton:
+python pimaton.py # see Usage section for more example.
 ```
 
 ## Configuration
