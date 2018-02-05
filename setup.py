@@ -1,17 +1,28 @@
 from setuptools import setup
 
 setup(name='pimaton',
-      version='0.1',
-      description='A photobooth app for raspberry pi',
-      url='https://git.bacardi55.org/bacardi55/pimaton',
+      version='0.0.3',
+      description='A photobooth application for raspberry pi',
+      url='https://github.com/bacardi55/pimaton',
       author='bacardi55',
       author_email='bac@rdi55.pl',
       license='GPLv3',
       packages=['pimaton'],
       install_requires=[
-          'picamera', 'six', 'pyyaml', 'pillow'
+          'picamera', 'six', 'pyyaml', 'pillow', 'pycups'
       ],
-      extras_require={
-          'Print': ["pycups"]
-      },
+      keywords = 'photobooth raspberrypi picamera'],
+      classifiers=[
+          'Development Status :: 4 beta',
+          'Environment :: Console',
+          'Environment :: X11 Applications',
+          'Intended Audience :: Developers',
+          'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)'
+          'Operating System :: POSIX :: Linux',
+          'Programming Language :: Python :: 2',
+          'Programming Language :: Python :: 2.7'
+      ],
+      entry_points = {
+          'console_scripts': ['pimaton=pimaton:main']
+      }
       zip_safe=False)
