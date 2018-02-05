@@ -12,7 +12,7 @@ setup(name='pimaton',
       install_requires=[
           'picamera', 'six', 'pyyaml', 'pillow', 'pycups'
       ],
-      keywords = 'photobooth raspberrypi picamera'],
+      keywords = 'photobooth raspberrypi picamera',
       classifiers=[
           'Development Status :: 4 beta',
           'Environment :: Console',
@@ -25,5 +25,5 @@ setup(name='pimaton',
       ],
       entry_points = {
           'console_scripts': ['pimaton=pimaton:main']
-      }
+      },
       zip_safe=False)
