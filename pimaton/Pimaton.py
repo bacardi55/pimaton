@@ -1,4 +1,5 @@
 from time import time, sleep
+import os
 
 import yaml
 import datetime
@@ -98,7 +99,7 @@ class Pimaton:
         Class method to set the configuration of the application
         """
         if config_file is None:
-            config_file = './assets/default_config.yaml'
+            config_file = os.path.dirname(os.path.realpath(__file__)) + '/assets/default_config.yaml'
             logger.debug(
                 'No given config, loading default one %s' %
                 config_file)
