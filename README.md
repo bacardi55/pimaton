@@ -102,7 +102,7 @@ Then edit it as you wish, but be careful with what you modify :). Hope the comme
 ## Usage
 
 ```bash
-usage: pimaton.py [-h] [--debug] [--config-file CONFIG_FILE]
+usage: pimaton [-h] [--debug] [--config-file CONFIG_FILE]
                   [--generate-template] [-v]
 
 Pimaton.
@@ -122,20 +122,20 @@ optional arguments:
 To use Pimaton:
 
 ```bash
-python pimaton.py --config-dir=/path/to/myconfig.yaml # Run pymathon with given config file - should be the "production mode" command.
-python pimaton.py --debug # Display all debug messages and use default config file.
-python pimaton.py --debug --config-file=/path/to/myconfig.yaml # Display all debug messages and use custom config file.
+pimaton --config-dir=/path/to/myconfig.yaml # Run pymathon with given config file - should be the "production mode" command.
+pimaton --debug # Display all debug messages and use default config file.
+pimaton --debug --config-file=/path/to/myconfig.yaml # Display all debug messages and use custom config file.
 ```
 
 To generate a template file (empty based image with placeholder for thumbnails like [this example](docs/assets/pimaton_template.jpg):
 
 ```bash
 # Generate template for default config:
-python pimaton.py --generate-template
+pimaton --generate-template
 # Generate template for custom config:
-python pimaton.py --config-file=/path/to/config_file.yaml --generate-template
+pimaton --config-file=/path/to/config_file.yaml --generate-template
 # Generate template for custom config with debug output:
-python pimaton.py --debug --config-file=/path/to/config_file.yaml --generate-template
+pimaton --debug --config-file=/path/to/config_file.yaml --generate-template
 ```
 
 
