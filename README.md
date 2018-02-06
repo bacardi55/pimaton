@@ -31,6 +31,11 @@ The main goals of Pimaton are:
 
 I am sure i might have other ideas over time too :).
 
+**NOTA**:
+- This is my first full python project (after some small contributions to other)
+- This is my first pip package (i've tested it on my pi though :D)
+- «It works on my rpi»
+- I love merging pull request ;)
 
 ## What can it do now ?
 
