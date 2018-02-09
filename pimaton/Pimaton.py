@@ -40,7 +40,7 @@ class Pimaton:
         return str(int(time()))
 
     def take_pictures(self, unique_key):
-        logger.info('Starting taking pictures')
+        logger.info('*** Pimaton *** Starting taking pictures')
         try:
             taken_pictures = self.pimatoncam.take_pictures(unique_key)
         except PimatonCamExceptions as e:
@@ -62,7 +62,7 @@ class Pimaton:
         return filename
 
     def generate_picture(self, taken_pictures, filename):
-        logger.info('Starting image generation')
+        logger.info('*** Pimaton *** Starting image generation')
         try:
             self.pimatonimage.render_image_to_print(
                 self.__get_fullpath_thumbnails_list(taken_pictures),
@@ -78,7 +78,7 @@ class Pimaton:
                 'Couldnt generate the picture to print')
 
     def print_picture(self, to_print):
-        logger.info('Starting printing image')
+        logger.info('*** Pimaton *** Starting printing image')
         if self.config['print']['enabled'] is True \
                 and isinstance(self.pimatonprint, PimatonPrint):
             try:
@@ -92,7 +92,7 @@ class Pimaton:
             logger.debug('Print is disable, skipping')
 
     def sync_pictures(self):
-        logger.info('Starting uploading image')
+        logger.info('*** Pimaton *** Starting uploading image')
         try:
             subprocess.call(["rsync", "-azP", self.config['sync']['source'], self.config['sync']['destination']])
         except Exception as e:
