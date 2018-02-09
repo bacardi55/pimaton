@@ -38,6 +38,10 @@ I am sure i might have other ideas over time too :).
 - This is my first pip package (i've tested it on my pi though :D)
 - «It works on my rpi»
 - I love merging pull request ;)
+<<<<<<< HEAD
+=======
+
+>>>>>>> features/websync
 
 ## What can it do now ?
 
@@ -52,6 +56,8 @@ So far, the code in that repo can:
     - In TUI: Only Keyboard (Return key)
     - In GUI: Keyboard (Return key) **and/or** GUI button (can work with a mouse or directly via the Touchscreen if available)
     - (GPIO option for both TUI and GUI coming soon)
+- Synchronise image via rsync on a remote server (you need to have rsync installed and an ssh-key without passphrase)
+
 
 ## Installation
 
@@ -62,6 +68,11 @@ sudo apt install python-pip libjpeg-dev
 pip install -U pip
 # To enable GUI:
 sudo apt install python-tk python-pil.imagetk
+<<<<<<< HEAD
+=======
+# To enable synchronizing image to a remote server
+sudo apt install rsync
+>>>>>>> features/websync
 ```
 
 ### Automated via Pip
@@ -153,8 +164,8 @@ The next planned item are:
 - ~~[v0.0.1 - core feature](docs/roadmap.md):~~
 - ~~[v0.0.2 - print capabilities](docs/roadmap.md):~~
 - ~~[v0.0.3 - GUI implementation (WIP)](docs/roadmap.md):~~
-- v0.0.4 - Web:
-  - Sync
+- v0.0.4 - Web (WIP):
+  - ~~Sync~~
   - email
 - v0.0.5 - Hardware:
   - Add GPIO input option

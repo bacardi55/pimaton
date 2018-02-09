@@ -4,11 +4,13 @@ import os
 import yaml
 import datetime
 import logging
+import os
+import subprocess
 
 from PimatonCam import PimatonCam
 from PimatonImage import PimatonImage
 from PimatonPrint import PimatonPrint
-from PimatonExceptions import PimatonExceptions, PimatonCamExceptions, PimatonPrintExceptions
+from PimatonExceptions import PimatonExceptions, PimatonCamExceptions, PimatonPrintExceptions, PimatonSyncExceptions
 
 logging.basicConfig()
 logger = logging.getLogger("Pimaton")
@@ -38,6 +40,7 @@ class Pimaton:
         return str(int(time()))
 
     def take_pictures(self, unique_key):
+        logger.info('Starting taking pictures')
         try:
             taken_pictures = self.pimatoncam.take_pictures(unique_key)
         except PimatonCamExceptions as e:
@@ -59,9 +62,8 @@ class Pimaton:
         return filename
 
     def generate_picture(self, taken_pictures, filename):
+        logger.info('Starting image generation')
         try:
-            logger.info('Starting image generation')
-
             self.pimatonimage.render_image_to_print(
                 self.__get_fullpath_thumbnails_list(taken_pictures),
                 filename,
@@ -76,6 +78,7 @@ class Pimaton:
                 'Couldnt generate the picture to print')
 
     def print_picture(self, to_print):
+        logger.info('Starting printing image')
         if self.config['print']['enabled'] is True \
                 and isinstance(self.pimatonprint, PimatonPrint):
             try:
@@ -87,6 +90,13 @@ class Pimaton:
                 raise
         else:
             logger.debug('Print is disable, skipping')
+
+    def sync_pictures(self):
+        logger.info('Starting uploading image')
+        try:
+            subprocess.call(["rsync", "-azP", self.config['sync']['source'], self.config['sync']['destination']])
+        except Exception as e:
+            raise PimatonSyncExceptions('Couldnt sync pictures: %s' % e)
 
     def wait_before_next_iteration(self):
         logger.debug(
@@ -131,8 +141,7 @@ class Pimaton:
         return self.config['print']['enabled']
 
     def is_sync_enabled(self):
-        # Not implemented yet.
-        return False
+        return self.config['sync']['enabled']
 
     def generate_template(self):
         self.pimatonimage.generate_template_file(self.config['image'])

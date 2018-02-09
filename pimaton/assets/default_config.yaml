@@ -1,5 +1,4 @@
 ---
-
 # PiCamera options.
 picamera:
     # Where to store taken pictures.
@@ -42,7 +41,7 @@ pimaton:
     inputs:
         - "keyboard" # React on "enter" key.
         - "gui" # Only available when ui_mode us GUI.
-        # - GPIO
+        # - GPIO # Not available yet.
 
 # This section is only used if pimaton[ui_mode] is set to "gui"
 gui:
@@ -93,3 +92,11 @@ print:
         # Options must have string key and value, do not remove the quotes. 
         fit-to-page: 'True'
         copies: '1'
+
+# Synchronisation options.
+sync:
+    # IF you want to enable synchronisation to a remote server.
+    enabled: false
+    # You need to have configure an ssh key without password for this.
+    destination: "login@server.org:/destination/path"
+    source: "/home/pi/pimaton_pictures/"

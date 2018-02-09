@@ -25,7 +25,13 @@ class PimatonTUI(PimatonUI, object):
             to_print = self.pimaton.generate_picture(
                 taken_pictures,
                 filename)
-            self.pimaton.print_picture(to_print)
+
+            if self.pimaton.is_print_enabled() is True:
+                self.pimaton.print_picture(to_print)
+
+            if self.pimaton.is_sync_enabled():
+                self.pimaton.sync_pictures()
+
             self.pimaton.wait_before_next_iteration()
 
     def is_triggered(self):
