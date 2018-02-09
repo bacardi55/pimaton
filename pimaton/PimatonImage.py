@@ -29,7 +29,7 @@ class PimatonImage(with_metaclass(Singleton, object)):
         This method create the final image to be printed.
         """
 
-        logger.info('Generating image to be printed: %s/%s' %
+        logger.debug('Generating image to be printed: %s/%s' %
                     (config['print_pic']['output_dir'], filename))
         logger.debug('Taken Pictures: %s' % taken_pictures)
 
@@ -64,7 +64,7 @@ class PimatonImage(with_metaclass(Singleton, object)):
             '/' +
             filename,
             'JPEG')
-        logger.debug('Final picture has been generated')
+        logger.info('*** Pimaton Image *** Final picture has been generated')
 
     def __calculate_dimensions(self, config):
         """
