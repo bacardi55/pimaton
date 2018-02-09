@@ -22,7 +22,7 @@
   - ~~Add a command to generate the template file to facilitate user to personalize it~~
   - ~~Create pip package (will be usable (in a rough state) when tagging v0.0.3)~~
 - v0.0.4 - Web (WIP):
-  - Sync
+  - ~~Sync~~
   - email
 - v0.0.5 - Hardware:
   - Add GPIO input option

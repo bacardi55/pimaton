@@ -1,10 +1,10 @@
 from time import time, sleep
-import os
 
 import yaml
 import datetime
 import logging
 import os
+import subprocess
 
 from PimatonCam import PimatonCam
 from PimatonImage import PimatonImage
@@ -39,6 +39,7 @@ class Pimaton:
         return str(int(time()))
 
     def take_pictures(self, unique_key):
+        logger.info('Starting taking pictures')
         try:
             taken_pictures = self.pimatoncam.take_pictures(unique_key)
         except PimatonCamExceptions as e:
@@ -60,9 +61,8 @@ class Pimaton:
         return filename
 
     def generate_picture(self, taken_pictures, filename):
+        logger.info('Starting image generation')
         try:
-            logger.info('Starting image generation')
-
             self.pimatonimage.render_image_to_print(
                 self.__get_fullpath_thumbnails_list(taken_pictures),
                 filename,
@@ -77,6 +77,7 @@ class Pimaton:
                 'Couldnt generate the picture to print')
 
     def print_picture(self, to_print):
+        logger.info('Starting printing image')
         if self.config['print']['enabled'] is True \
                 and isinstance(self.pimatonprint, PimatonPrint):
             try:
@@ -90,9 +91,9 @@ class Pimaton:
             logger.debug('Print is disable, skipping')
 
     def sync_pictures(self):
-        cmd = "rsync -azP " + self.config['sync']['source'] + " " + self.config['sync']['destination']
+        logger.info('Starting uploading image')
         try:
-            os.system(cmd)
+            subprocess.call(["rsync", "-azP", self.config['sync']['source'], self.config['sync']['destination']])
         except Exception as e:
             raise PimatonSyncExceptions('Couldnt sync pictures: %s' % e)
 

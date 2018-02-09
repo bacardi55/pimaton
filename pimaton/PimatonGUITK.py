@@ -167,7 +167,6 @@ class PimatonGUITK(tk.Frame, object):
 
         time.sleep(self.config['time_between_steps'])
 
-        # TODO v0.0.5: Sync picture to the internet.
         if self.pimaton.is_sync_enabled():
             self.ui['screens']['processing'].set_canvas_image(
                 taken_pictures[self.current_step - 1])

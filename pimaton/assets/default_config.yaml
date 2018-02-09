@@ -1,5 +1,4 @@
 ---
-
 # PiCamera options.
 picamera:
     # Where to store taken pictures.
@@ -42,7 +41,7 @@ pimaton:
     inputs:
         - "keyboard" # React on "enter" key.
         - "gui" # Only available when ui_mode us GUI.
-        # - GPIO
+        # - GPIO # Not available yet.
 
 # This section is only used if pimaton[ui_mode] is set to "gui"
 gui:
