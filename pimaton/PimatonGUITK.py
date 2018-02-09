@@ -144,13 +144,13 @@ class PimatonGUITK(tk.Frame, object):
         self.ui['screens']['processing'].set_progress_value(
             self.current_step * self.progress_inc)
         # Update progress on statusbar text.
+        self.current_step = self.current_step + 1
         self.ui['screens']['processing'].set_step_value(
             'Step ' + str(self.current_step) + '/' + str(self.nb_steps) + ': Generating picture to print')
         self.update_idletasks()
 
         filename = self.pimaton.get_filename(unique_key)
         to_print = self.pimaton.generate_picture(taken_pictures, filename)
-        self.current_step = self.current_step + 1
 
         time.sleep(self.config['time_between_steps'])
 
@@ -159,11 +159,11 @@ class PimatonGUITK(tk.Frame, object):
                 taken_pictures[self.current_step - 1])
             self.ui['screens']['processing'].set_progress_value(
                 self.current_step * self.progress_inc)
+            self.current_step = self.current_step + 1
             self.ui['screens']['processing'].set_step_value(
                 'Step ' + str(self.current_step) + '/' + str(self.nb_steps) + ': Sending picture to printer')
             self.update_idletasks()
             self.pimaton.print_picture(to_print)
-            self.current_step = self.current_step + 1
 
         time.sleep(self.config['time_between_steps'])
 
@@ -172,10 +172,10 @@ class PimatonGUITK(tk.Frame, object):
                 taken_pictures[self.current_step - 1])
             self.ui['screens']['processing'].set_progress_value(
                 self.current_step * self.progress_inc)
+            self.current_step = self.current_step + 1
             self.ui['screens']['processing'].set_step_value(
                 'Step ' + str(self.current_step) + '/' + str(self.nb_steps) + ': Syncing picture to the internet')
             self.update_idletasks()
-            self.current_step = self.current_step + 1
             self.pimaton.sync_pictures()
 
         time.sleep(self.config['time_between_steps'])
