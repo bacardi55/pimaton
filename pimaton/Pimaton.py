@@ -93,10 +93,11 @@ class Pimaton:
 
     def sync_pictures(self):
         logger.info('*** Pimaton *** Starting uploading image')
-        try:
-            subprocess.call(["rsync", "-azP", self.config['sync']['source'], self.config['sync']['destination']])
-        except Exception as e:
-            raise PimatonSyncExceptions('Couldnt sync pictures: %s' % e)
+        with open(os.devnull, 'w') as FNULL:
+            try:
+                subprocess.call(["rsync", "-azP", self.config['sync']['source'], self.config['sync']['destination']], stdout=FNULL)
+            except Exception as e:
+                raise PimatonSyncExceptions('Couldnt sync pictures: %s' % e)
 
     def wait_before_next_iteration(self):
         logger.debug(
