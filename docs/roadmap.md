@@ -23,6 +23,7 @@
   - ~~Create pip package (will be usable (in a rough state) when tagging v0.0.3)~~
 - v0.0.4 - Web (WIP):
   - ~~Sync~~
+  - ~~CLI option to run Pimaton only once (to integrate into scripts)~~
   - email
 - v0.0.5 - Hardware:
   - Add GPIO input option

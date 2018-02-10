@@ -145,6 +145,15 @@ pimaton --debug # Display all debug messages and use default config file.
 pimaton --debug --config-file=/path/to/myconfig.yaml # Display all debug messages and use custom config file.
 ```
 
+If you want to run pimaton automatically once and quit, use the ```--single``` option. It will start pimaton, trigger the start automatically and quit after running once.
+
+This can be useful for testing or if you want to script around pimaton (eg: integration with kalliope or other tools.)
+
+```bash
+pimaton --single # Run pimaton with default configuration once.
+pimaton --single --config-file=/path/to/myconfig.yaml # Run pimaton with custom configuration only once.
+```
+
 To generate a template file (empty based image with placeholder for thumbnails like [this example](docs/assets/pimaton_template.jpg):
 
 ```bash

@@ -34,6 +34,10 @@ class PimatonGUITK(tk.Frame, object):
         self.set_fonts()
         self.initialize_ui()
 
+        if self.pimaton.is_single_loop() is True:
+            logger.info('*** Pimaton GUI *** Single Loop is True, not waiting for trigger!')
+            self.start_triggered()
+
     def set_fonts(self):
         self.fonts = {
             'small': tkf.Font(size=6),
@@ -187,6 +191,10 @@ class PimatonGUITK(tk.Frame, object):
         self.ui['screens']['processing'].set_step_value(
             'Pimaton process is done!')
         self.update_idletasks()
+
+        if self.pimaton.is_single_loop() is True:
+            logger.info('*** Pimaton GUI *** Single Loop is True, exiting Pimaton')
+            self.parent.destroy()
 
         time.sleep(self.config['time_between_steps'])
 

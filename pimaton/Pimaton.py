@@ -21,7 +21,7 @@ class Pimaton:
     This Class is the main Pimaton class that manage the whole application.
     """
 
-    def __init__(self, config_file=None):
+    def __init__(self, config_file=None, single_loop=False):
         logger.info('*** Configuring Pimaton ***')
         self.set_config(config_file)
 
@@ -35,6 +35,8 @@ class Pimaton:
         else:
             logger.info('**** Pimaton is configured to NOT print image.')
             self.pimatonprint = None
+
+        self.single_loop = True if single_loop is True else False
 
     def get_unique_key(cls):
         return str(int(time()))
@@ -146,3 +148,6 @@ class Pimaton:
 
     def generate_template(self):
         self.pimatonimage.generate_template_file(self.config['image'])
+
+    def is_single_loop(self):
+        return self.single_loop

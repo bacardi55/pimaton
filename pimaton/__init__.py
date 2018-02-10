@@ -35,7 +35,7 @@ def main():
     try:
         # Config app.
         logger.info('*** Pimaton is loading... ***')
-        pimaton = Pimaton(args.config_file)
+        pimaton = Pimaton(config_file=args.config_file, single_loop=args.single)
 
         if args.generate_template is True:
             pimaton.generate_template()
@@ -62,6 +62,8 @@ def retrieve_arguments(args):
     parser = argparse.ArgumentParser(description='Pimaton.')
     parser.add_argument("--debug", action='store_true',
                         help="Show debug output")
+    parser.add_argument("--single", action='store_true',
+                        help="Only run 1 iteration")
     parser.add_argument(
         "--config-file",
         help="Full path of the config file to load")
