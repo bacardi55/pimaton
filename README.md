@@ -38,10 +38,7 @@ I am sure i might have other ideas over time too :).
 - This is my first pip package (i've tested it on my pi though :D)
 - «It works on my rpi»
 - I love merging pull request ;)
-<<<<<<< HEAD
-=======
 
->>>>>>> features/websync
 
 ## What can it do now ?
 
