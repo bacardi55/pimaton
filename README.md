@@ -68,11 +68,8 @@ sudo apt install python-pip libjpeg-dev
 pip install -U pip
 # To enable GUI:
 sudo apt install python-tk python-pil.imagetk
-<<<<<<< HEAD
-=======
 # To enable synchronizing image to a remote server
 sudo apt install rsync
->>>>>>> features/websync
 ```
 
 ### Automated via Pip
@@ -120,7 +117,7 @@ Then edit it as you wish, but be careful with what you modify :). Hope the comme
 ## Usage
 
 ```bash
-usage: pimaton [-h] [--debug] [--config-file CONFIG_FILE]
+usage: pimaton.py [-h] [--debug] [--single] [--config-file CONFIG_FILE]
                   [--generate-template] [-v]
 
 Pimaton.
@@ -128,6 +125,7 @@ Pimaton.
 optional arguments:
   -h, --help            show this help message and exit
   --debug               Show debug output
+  --single              Only run 1 iteration
   --config-file CONFIG_FILE
                         Full path of the config file to load
   --generate-template   Generate a template image based on PiCamera
