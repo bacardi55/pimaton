@@ -54,6 +54,7 @@ So far, the code in that repo can:
     - In GUI: Keyboard (Return key) **and/or** GUI button (can work with a mouse or directly via the Touchscreen if available)
     - (GPIO option for both TUI and GUI coming soon)
 - Synchronise image via rsync on a remote server (you need to have rsync installed and an ssh-key without passphrase)
+- Display a QR code on the GUI that link to a website (eg: a gallery of all the picitures).
 
 
 ## Installation
@@ -169,8 +170,11 @@ The next planned item are:
 - ~~[v0.0.2 - print capabilities](docs/roadmap.md):~~
 - ~~[v0.0.3 - GUI implementation (WIP)](docs/roadmap.md):~~
 - v0.0.4 - Web (WIP):
-  - ~~Sync~~
-  - email
+  - ~~Sync to remote server~~
+  - ~~CLI option to run Pimaton only once (to integrate into scripts)~~
+  - ~~QR code link to a website (eg: webgallery of all pictures of the night)~~
+  - QR code printed on picture? (I'm afraid it might impose to remove 1 pictures for managing this.)
+  - email (not sure about this feature anymore)
 - v0.0.5 - Hardware:
   - Add GPIO input option
   - Camera Flash capability

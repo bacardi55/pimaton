@@ -151,3 +151,6 @@ class Pimaton:
 
     def is_single_loop(self):
         return self.single_loop
+
+    def is_qr_code_enabled(self):
+        return self.config['pimaton']['qr_code_link_to_site']

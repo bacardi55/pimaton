@@ -271,8 +271,16 @@ class WaitingScreen(tk.Frame, object):
         logger.debug('** GUI ** Create waiting screen')
         content_frame = tk.Frame(self)
         content_frame.pack(fill=tk.BOTH, expand=1, padx=10, pady=10)
-        button_frame = tk.Frame(content_frame, borderwidth=2)
 
+        left_frame = tk.Frame(content_frame)
+        left_frame.pack(side=tk.LEFT, fill=tk.BOTH)
+        right_frame = tk.Frame(content_frame)
+        right_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=1, padx=10, pady=10)
+
+        #button_frame = tk.Frame(content_frame, borderwidth=2)
+        button_frame = tk.Frame(right_frame, borderwidth=2)
+
+        logger.debug('inputs: %s' % inputs)
         if 'gui' in inputs:
             tk.Button(
                 button_frame,
@@ -289,6 +297,21 @@ class WaitingScreen(tk.Frame, object):
 
         button_frame.place(relx=.5, rely=.5, anchor=tk.CENTER)
 
+        if len(self.parent.config['qr_code_link_to_site']) > 0:
+            qrcode = self.generate_qr_code(self.parent.config['qr_code_link_to_site'])
+            width, height = qrcode.size
+            logger.debug('width %s - height %s' % (width, height))
+            # Canvas to display taken pictures.
+            self.qrcanvas = tk.Canvas(left_frame, width=width, height=height)
+            self.qrimage = ImageTk.PhotoImage(qrcode)
+            self.qrimagesprite = self.qrcanvas.create_image(165, 165, image=self.qrimage)
+            self.qrcanvas.pack()
+            tk.Label(
+                left_frame,
+                font=self.parent.fonts['normal'],
+                text=self.parent.config['qr_code_bellow_text']).pack(
+                anchor=tk.CENTER)
+
     def start_triggered(self):
         logger.debug('** GUI ** Start has been triggered')
         self.parent.start_triggered()
@@ -298,6 +321,19 @@ class WaitingScreen(tk.Frame, object):
 
     def show(self):
         self.pack(fill=tk.BOTH, expand=1)
+
+    def generate_qr_code(self, link):
+        import qrcode
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4)
+        qr.add_data(link)
+        qr.make(fit=True)
+
+        img = qr.make_image()
+        return img
 
 
 class ProcessingScreen(tk.Frame, object):

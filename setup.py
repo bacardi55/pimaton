@@ -10,7 +10,7 @@ setup(name='pimaton',
       license='GPLv3',
       packages=['pimaton'],
       install_requires=[
-          'picamera', 'six', 'pyyaml', 'pillow', 'pycups'
+          'picamera', 'six', 'pyyaml', 'pillow', 'pycups', 'qrcode'
       ],
       keywords = 'photobooth raspberrypi picamera',
       classifiers=[

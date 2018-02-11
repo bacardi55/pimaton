@@ -24,7 +24,8 @@
 - v0.0.4 - Web (WIP):
   - ~~Sync~~
   - ~~CLI option to run Pimaton only once (to integrate into scripts)~~
-  - email
+  - ~~QR code link to a website (eg: webgallery of all pictures of the night)~~
+  - QR code printed on picture?
 - v0.0.5 - Hardware:
   - Add GPIO input option
   - Camera Flash capability
@@ -33,4 +34,3 @@
   - Additional GUI options: enable/disable flash
   - See slideshow of picture (either via button on GUI or as screensaver)
   - Server + photo gallery web application (+ QR link compatible)
-  - QR code link

@@ -52,6 +52,10 @@ gui:
     time_between_processing_and_thankyou_screen: 2
     time_between_thankyou_and_waiting: 5
     time_between_steps: 2
+    # Display a QR code that links to this url.
+    qr_code_link_to_site: ''
+    # Display a text bellow the QR code.
+    qr_code_bellow_text: "Find all pictures on https://madwin.bacardi55.org\nOr by scanning the QR code above."
 
 # Image options.
 image:
@@ -92,6 +96,8 @@ print:
         # Options must have string key and value, do not remove the quotes. 
         fit-to-page: 'True'
         copies: '1'
+    # If a QR code direct to the session gallery should be printed.
+    qr_code_enable: false
 
 # Synchronisation options.
 sync:
