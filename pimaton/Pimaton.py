@@ -63,13 +63,14 @@ class Pimaton:
 
         return filename
 
-    def generate_picture(self, taken_pictures, filename):
+    def generate_picture(self, taken_pictures, filename, qrcode):
         logger.info('*** Pimaton *** Starting image generation')
         try:
             self.pimatonimage.render_image_to_print(
                 self.__get_fullpath_thumbnails_list(taken_pictures),
                 filename,
-                self.config['image'])
+                self.config['image'],
+                qrcode)
             to_print = self.config['image']['print_pic']['output_dir'] + \
                 '/' + filename
             return to_print
@@ -78,6 +79,23 @@ class Pimaton:
             logger.error('PimatonImageExceptions: %s' % e)
             raise PimatonExceptions(
                 'Couldnt generate the picture to print')
+
+    def get_qrcode(self, unique_key):
+        if self.config['print']['qr_code_enabled'] is not True:
+            return False
+
+        import qrcode
+        link = self.config['print']['qr_code_session_link'].replace('%%uuid%%', unique_key)
+        logger.debug(link)
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4)
+        qr.add_data(link)
+        qr.make(fit=True)
+
+        return qr.make_image()
 
     def print_picture(self, to_print):
         logger.info('*** Pimaton *** Starting printing image')

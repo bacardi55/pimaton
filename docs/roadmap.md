@@ -25,7 +25,7 @@
   - ~~Sync~~
   - ~~CLI option to run Pimaton only once (to integrate into scripts)~~
   - ~~QR code link to a website (eg: webgallery of all pictures of the night)~~
-  - QR code printed on picture?
+  - ~~Optional feature: QR code printed on picture~~ (When using this, it will take a picture slots, think about it :))
 - v0.0.5 - Hardware:
   - Add GPIO input option
   - Camera Flash capability

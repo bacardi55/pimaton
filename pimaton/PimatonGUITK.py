@@ -137,6 +137,7 @@ class PimatonGUITK(tk.Frame, object):
         # Reset current step.
         self.current_step = 1
         unique_key = self.pimaton.get_unique_key()
+        qrcode = self.pimaton.get_qrcode(unique_key)
         time.sleep(self.config['time_between_steps'])
         taken_pictures = self.pimaton.take_pictures(unique_key)
 
@@ -154,7 +155,7 @@ class PimatonGUITK(tk.Frame, object):
         self.update_idletasks()
 
         filename = self.pimaton.get_filename(unique_key)
-        to_print = self.pimaton.generate_picture(taken_pictures, filename)
+        to_print = self.pimaton.generate_picture(taken_pictures, filename, qrcode)
 
         time.sleep(self.config['time_between_steps'])
 

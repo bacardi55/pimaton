@@ -24,7 +24,7 @@ class PimatonImage(with_metaclass(Singleton, object)):
         self.config = config
         self.dimensions = self.__calculate_dimensions(config)
 
-    def render_image_to_print(self, taken_pictures, filename, config):
+    def render_image_to_print(self, taken_pictures, filename, config, qrcode=False):
         """
         This method create the final image to be printed.
         """
@@ -58,6 +58,10 @@ class PimatonImage(with_metaclass(Singleton, object)):
         for idx, thumbnail in enumerate(thumbnails):
             positions = self.__get_positions(idx, config, self.dimensions)
             generated.paste(thumbnail, positions)
+
+        if qrcode is not False:
+            positions = self.__get_positions(idx+1, config, self.dimensions)
+            generated.paste(qrcode, positions)
 
         generated.save(
             config['print_pic']['output_dir'] +
