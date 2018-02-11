@@ -54,7 +54,8 @@ So far, the code in that repo can:
     - In GUI: Keyboard (Return key) **and/or** GUI button (can work with a mouse or directly via the Touchscreen if available)
     - (GPIO option for both TUI and GUI coming soon)
 - Synchronise image via rsync on a remote server (you need to have rsync installed and an ssh-key without passphrase)
-- Display a QR code on the GUI that link to a website (eg: a gallery of all the picitures).
+- Optional: Display a QR code on the GUI that link to a website (eg: a gallery of all the picitures).
+- Optional: Print a QR code on the final picture to link to the direct page of the web gallery
 
 
 ## Installation
