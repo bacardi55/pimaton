@@ -18,18 +18,12 @@ You can also find a gif of the GUI [here](https://bacardi55.org/2018/02/06/pimat
 
 The booth is not mounted yet, but gives an idea of the application running and the speed to generate/print the image.
 
-The main goals of Pimaton are:
-- To be simple and installable quickly on a raspberrypi (via Pip)
-- To be configurable ([check the config file](pimaton/assets/default_config.yaml) to see all options
-  - Options includes (but not limited to), number of picture taken, size of thumbnails and their layout on printed image. A background/template image can be used to customize the final image.
-  - A command is included to generate a blank template with placeholder for the future image to facilitate template creation. See [example](docs/assets/pimaton_template.jpg)
-- To run either on CLI (still with camera preview thanks to PiCamera) or via a GUI (if X installed, will run a TK app in fullscreen mode)
-- To be triggered either via keyboard, touchscreen (if GUI + touchscreen) and/or via GPIO (if like me you want to plug an big arcade button :))
-- If there is an internet connection:
-  - To sync pictures on a web servers
-  - And in GUI mode only:
-      - To generate a QR code that link to a page to download taken picture taken and generated (the pic from the last loop, so people can just go download their pic they just tke instead of printing X times)
-      - To ask for an email address to send the picture from the last loop (same as above)
+Goals were/are simple: easy installation, extensive configuration and options so it can be reused: 
+- It's installable via "pip install pimaton".
+- Two mode available: GUI (with python TK, you need X installed) or TUI. App can be triggered by touchscreen/mouse or keyboard. I'm planning to add a GPIO option too (to add a big hardware arcade button).
+- Almost everything can be configured in a yaml file (from size of taken pictures, thumbnails, texts). Some features are optional, like actually printing the file or syncing them to a web server (not done yet).
+- The printed image can be customized via a template image to add things like texts (eg: "Wedding of Anakin Skywalker and Padmé Amidala") and/or adding decoration (eg: small light saber icon eveywhere). The app let you generate a blank template with the placeholder for the image to simplify the template creation.
+- And a lot more done or planned :).
 
 I am sure i might have other ideas over time too :).
 
