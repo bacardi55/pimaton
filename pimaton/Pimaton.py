@@ -81,14 +81,14 @@ class Pimaton:
                 'Couldnt generate the picture to print')
 
     def get_qrcode(self, unique_key):
-        if self.config['print']['qr_code_enabled'] is not True:
+        if self.config['image']['print_pic']['qr_code_enabled'] is not True:
             return False
 
         import qrcode
-        link = self.config['print']['qr_code_session_link'].replace('%%uuid%%', unique_key)
+        link = self.config['image']['print_pic']['qr_code_session_link'].replace('%%uuid%%', unique_key)
         logger.debug(link)
         qr = qrcode.QRCode(
-            version=1,
+            version=self.config['image']['print_pic']['qr_code_size'],
             error_correction=qrcode.constants.ERROR_CORRECT_L,
             box_size=10,
             border=4)
