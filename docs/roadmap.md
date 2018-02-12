@@ -21,7 +21,7 @@
   - ~~Implement multi input in in both TUI and GUI mode~~ (for now: 'keyboard' and/or 'gui' - only 'keyboard' is usable in TUI mode so far)
   - ~~Add a command to generate the template file to facilitate user to personalize it~~
   - ~~Create pip package (will be usable (in a rough state) when tagging v0.0.3)~~
-- v0.0.4 - Web (WIP):
+- ~~v0.0.4 - Web:~~
   - ~~Sync~~
   - ~~CLI option to run Pimaton only once (to integrate into scripts)~~
   - ~~QR code link to a website (eg: webgallery of all pictures of the night)~~
