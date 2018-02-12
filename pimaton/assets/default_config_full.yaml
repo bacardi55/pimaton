@@ -3,7 +3,7 @@
 picamera:
     # Where to store taken pictures.
     photo_directory: "/home/pi/pimaton_pictures"
-    number_of_pictures_to_take: 6
+    number_of_pictures_to_take: 5
     time_before_first_picture: 4
     time_between_pictures: 2
     # Prefix for the name of the taken pictures.
@@ -37,10 +37,26 @@ pimaton:
     # UI mode, can be tui (Text user interface) or GUI (graphical user interface)
     # For the GUI to work, you need X and a desktop manager.
     # Only tui mode is available for now.
-    ui_mode: 'tui'
+    ui_mode: 'gui'
     inputs:
         - "keyboard" # React on "enter" key.
+        - "gui" # Only available when ui_mode us GUI.
         # - GPIO # Not available yet.
+
+# This section is only used if pimaton[ui_mode] is set to "gui"
+gui:
+    header_message: "Pimaton - Opensource PhotoBooth app for Rpi!"
+    footer_message: "All pictures will be saved and sent to the newly wed, be careful ;)"
+    start_btn_txt: "Let's roll!"
+    thankyou_message: "Thanks for using Pimaton, your picture should be ready!"
+    time_between_processing_and_thankyou_screen: 2
+    time_between_thankyou_and_waiting: 5
+    time_between_steps: 2
+    # Display a QR code that links to this url.
+    qr_code_link_to_site: 'https://github.com/bacardi55/pimaton'
+    # Display a text bellow the QR code.
+    # Will be displayed only if QR code above is enabled.
+    qr_code_bellow_text: "All picture are sync to a web gallery,\njust scan the QR code above!"
 
 # Image options.
 image:
@@ -59,7 +75,13 @@ image:
         rows: 3
         cols: 2
         # If a QR code direct to the session gallery should be printed.
-        qr_code_enabled: false
+        qr_code_enabled: true
+        # The link to the gallery. %%uuid%% will be modified with the unique identifier.
+        qr_code_session_link: "https://github.com/bacardi55/pimaton"
+        # Change the size of the QR code. Be carreful with this option.
+        # Change only if you have changed the number of taken picture or if you
+        # are sure of what you're doing :)
+        qr_code_size: 7
 
     # Thumbnails size.
     thumbnails:
@@ -69,8 +91,25 @@ image:
 print:
     # If pimaton should try to print the generated picture.
     enabled: false
+    # The rest of the options are only needed if pimaton[enable_print] is True.
+    user: 'pi'
+    printer_key: 0
+    app_name: 'Pimaton'
+    # If Like me, your printer doesn't like receiving 2 commands too fast,
+    # you can set a timer between each print command.
+    time_between_print: 5
+    # If your printer works faster if you wait for the previous job to be finished.
+    wait_for_finished_job: true
+    # Options to path to pycups printFile method
+    options:
+        # Options must have string key and value, do not remove the quotes.
+        fit-to-page: 'True'
+        copies: '1'
 
 # Synchronisation options.
 sync:
     # IF you want to enable synchronisation to a remote server.
     enabled: false
+    # You need to have configure an ssh key without password for this.
+    destination: "login@server.org:/destination/path"
+    source: "/home/pi/pimaton_pictures/"
