@@ -11,7 +11,7 @@ The principle is simple, it takes picture when triggered (configurable number), 
 (The picture are not pixelized like this, I just "anonymized" them a bit^^)
 
 
-If you want an idea of what it looks like when running, click on the image below (demo of v0.0.3, not v0.0.4):
+If you want an idea of what it looks like when running, click on the image below (demo of v0.0.3, not v0.0.4 which is the last stable version at the moment):
 
 [![QUICK DEMO](https://img.youtube.com/vi/HJ43O-nPQzw/0.jpg)](https://www.youtube.com/watch?v=HJ43O-nPQzw)
 
@@ -169,13 +169,13 @@ The next planned item are:
 - ~~[v0.0.1 - core feature](docs/roadmap.md):~~
 - ~~[v0.0.2 - print capabilities](docs/roadmap.md):~~
 - ~~[v0.0.3 - GUI implementation (WIP)](docs/roadmap.md):~~
-- v0.0.4 - Web (WIP):
+- ~~v0.0.4 - Web~~: Find a [full blog post](https://bacardi55.org/2018/02/13/having-all-pimaton-pictures-available-on-a-webgallery.html) and [an article about it](https://bacardi55.org/pimaton/part5-optional-webgallery.html)
   - ~~Sync to remote server~~
   - ~~CLI option to run Pimaton only once (to integrate into scripts)~~
   - ~~Optional feature: QR code link to a website (eg: webgallery of all pictures of the night)~~
   - ~~Optional feature: QR code printed on picture~~ (When using this, it will take a picture slots, think about it :))
   - email (not sure about this feature anymore)
-- v0.0.5 - Hardware:
+- v0.0.5 - Hardware (To be started):
   - Add GPIO input option
   - Camera Flash capability
 
@@ -185,6 +185,8 @@ You can find the [full roadmap here](docs/roadmap.md)
 ## Where can I find more info ?
 
 So far, only on [my blog](https://bacardi55.org/tags.html#pimaton) or in the code ^^" (but it still requires a lot of comments).
+
+I've also created a [dedicated space on my site](https://bacardi55.org/pimaton.html)
 
 You can find the todolist [here](docs/todo.md)
 

@@ -1,10 +1,10 @@
 from setuptools import setup
 
 setup(name='pimaton',
-      version='0.0.3',
+      version='0.0.4',
       description='A photobooth application for raspberry pi',
       url='https://github.com/bacardi55/pimaton',
-      download_url='https://github.com/bacardi55/pimaton/archive/v0.0.3.tar.gz',
+      download_url='https://github.com/bacardi55/pimaton/archive/v0.0.4.tar.gz',
       author='bacardi55',
       author_email='bac@rdi55.pl',
       license='GPLv3',
