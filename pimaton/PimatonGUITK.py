@@ -299,19 +299,18 @@ class WaitingScreen(tk.Frame, object):
         button_frame.place(relx=.5, rely=.5, anchor=tk.CENTER)
 
         if len(self.parent.config['qr_code_link_to_site']) > 0:
+            self.qrmessage = tk.Label(
+                left_frame,
+                font=self.parent.fonts['normal'],
+                text=self.parent.config['qr_code_bellow_text'])
+            self.qrmessage.pack(side=tk.BOTTOM)
             qrcode = self.generate_qr_code(self.parent.config['qr_code_link_to_site'])
             width, height = qrcode.size
-            logger.debug('width %s - height %s' % (width, height))
             # Canvas to display taken pictures.
             self.qrcanvas = tk.Canvas(left_frame, width=width, height=height)
             self.qrimage = ImageTk.PhotoImage(qrcode)
             self.qrimagesprite = self.qrcanvas.create_image(165, 165, image=self.qrimage)
             self.qrcanvas.pack()
-            tk.Label(
-                left_frame,
-                font=self.parent.fonts['normal'],
-                text=self.parent.config['qr_code_bellow_text']).pack(
-                anchor=tk.CENTER)
 
     def start_triggered(self):
         logger.debug('** GUI ** Start has been triggered')
