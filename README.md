@@ -4,14 +4,14 @@
 
 Pimaton is a simple photo booth application that can run on a raspberry pi with a PiCamera.
 
-The principle is simple, it takes picture when triggered (configurable number), then generate a picture with all the taken pictures that can be printed (optional) or send somewhere (not developed yet)
+The principle is simple, it takes picture when triggered (configurable number), then generate a picture with all the taken pictures that can be printed (optional) or send somewhere (optional)
 
 [![pimaton_dryrun](https://git.bacardi55.org/bacardi55/pimaton/raw/master/docs/assets/pimaton_dryrun_thumbnail.jpg)](/docs/assets/pimaton_dryrun.jpg)
 
 (The picture are not pixelized like this, I just "anonymized" them a bit^^)
 
 
-If you want an idea of what it looks like when running, click on the image below:
+If you want an idea of what it looks like when running, click on the image below (demo of v0.0.3, not v0.0.4):
 
 [![QUICK DEMO](https://img.youtube.com/vi/HJ43O-nPQzw/0.jpg)](https://www.youtube.com/watch?v=HJ43O-nPQzw)
 
@@ -22,7 +22,7 @@ The booth is not mounted yet, but gives an idea of the application running and t
 Goals were/are simple: easy installation, extensive configuration and options so it can be reused: 
 - It's installable via "pip install pimaton".
 - Two mode available: GUI (with python TK, you need X installed) or TUI. App can be triggered by touchscreen/mouse or keyboard. I'm planning to add a GPIO option too (to add a big hardware arcade button).
-- Almost everything can be configured in a yaml file (from size of taken pictures, thumbnails, texts). Some features are optional, like actually printing the file or syncing them to a web server (not done yet).
+- Almost everything can be configured in a yaml file (from size of taken pictures, thumbnails, texts). Some features are optional, like actually printing the file or syncing them to a web server.
 - The printed image can be customized via a template image to add things like texts (eg: "Wedding of Anakin Skywalker and Padmé Amidala") and/or adding decoration (eg: small light saber icon eveywhere). The app let you generate a blank template with the placeholder for the image to simplify the template creation.
 - And a lot more done or planned :).
 
@@ -98,10 +98,14 @@ python pimaton.py # see Usage section for more example.
 
 ## Configuration
 
-Copy the default configuration file to your workspace:
+Copy one of the 2 configuration file.
+```default_config.yaml``` contains the minimal config to work. It doesn't print the file, synchronise picture or manage QR code. Works only on GUI.
+```default_config_full.yaml``` contains all option, and is configured by default to use the GUI and manage QR code. Sync and Print are disable but all options are shown as it requires configuration before enabling these feature.
 
 ```bash
 cp /usr/local/lib/python2.7/dist-packages/pimaton/assets/default_config.yaml /path/to/myconfig.yaml
+# OR
+cp /usr/local/lib/python2.7/dist-packages/pimaton/assets/default_config_full.yaml /path/to/myconfig.yaml
 ```
 
 Then edit it as you wish, but be careful with what you modify :). Hope the comments in the file are enough.
@@ -132,8 +136,8 @@ optional arguments:
 To use Pimaton:
 
 ```bash
-pimaton --config-dir=/path/to/myconfig.yaml # Run pymathon with given config file - should be the "production mode" command.
-pimaton --debug # Display all debug messages and use default config file.
+pimaton --config-file=/path/to/myconfig.yaml # Run pymathon with given config file - should be the "production mode" command.
+pimaton --debug # Display all debug messages and use default minimal config file.
 pimaton --debug --config-file=/path/to/myconfig.yaml # Display all debug messages and use custom config file.
 ```
 
@@ -142,7 +146,7 @@ If you want to run pimaton automatically once and quit, use the ```--single``` o
 This can be useful for testing or if you want to script around pimaton (eg: integration with kalliope or other tools.)
 
 ```bash
-pimaton --single # Run pimaton with default configuration once.
+pimaton --single # Run pimaton with default minimal configuration once.
 pimaton --single --config-file=/path/to/myconfig.yaml # Run pimaton with custom configuration only once.
 ```
 
