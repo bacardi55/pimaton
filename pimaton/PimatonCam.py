@@ -27,7 +27,8 @@ class PimatonCam:
             self.picamera = PiCamera()
             self.config_picamera(config)
         else:
-            logger.debug('PiCamera module unavailable, aborting PimatonCam instantiation.')
+            logger.debug(
+                'PiCamera module unavailable, aborting PimatonCam instantiation.')
 
     def take_pictures(self, unique_key):
         """

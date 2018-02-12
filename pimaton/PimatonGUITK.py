@@ -35,7 +35,8 @@ class PimatonGUITK(tk.Frame, object):
         self.initialize_ui()
 
         if self.pimaton.is_single_loop() is True:
-            logger.info('*** Pimaton GUI *** Single Loop is True, not waiting for trigger!')
+            logger.info(
+                '*** Pimaton GUI *** Single Loop is True, not waiting for trigger!')
             self.start_triggered()
 
     def set_fonts(self):
@@ -155,7 +156,8 @@ class PimatonGUITK(tk.Frame, object):
         self.update_idletasks()
 
         filename = self.pimaton.get_filename(unique_key)
-        to_print = self.pimaton.generate_picture(taken_pictures, filename, qrcode)
+        to_print = self.pimaton.generate_picture(
+            taken_pictures, filename, qrcode)
 
         time.sleep(self.config['time_between_steps'])
 
@@ -194,7 +196,8 @@ class PimatonGUITK(tk.Frame, object):
         self.update_idletasks()
 
         if self.pimaton.is_single_loop() is True:
-            logger.info('*** Pimaton GUI *** Single Loop is True, exiting Pimaton')
+            logger.info(
+                '*** Pimaton GUI *** Single Loop is True, exiting Pimaton')
             self.parent.destroy()
 
         time.sleep(self.config['time_between_steps'])
@@ -276,7 +279,12 @@ class WaitingScreen(tk.Frame, object):
         left_frame = tk.Frame(content_frame)
         left_frame.pack(side=tk.LEFT, fill=tk.BOTH)
         right_frame = tk.Frame(content_frame)
-        right_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=1, padx=10, pady=10)
+        right_frame.pack(
+            side=tk.RIGHT,
+            fill=tk.BOTH,
+            expand=1,
+            padx=10,
+            pady=10)
 
         #button_frame = tk.Frame(content_frame, borderwidth=2)
         button_frame = tk.Frame(right_frame, borderwidth=2)
@@ -304,12 +312,14 @@ class WaitingScreen(tk.Frame, object):
                 font=self.parent.fonts['normal'],
                 text=self.parent.config['qr_code_bellow_text'])
             self.qrmessage.pack(side=tk.BOTTOM)
-            qrcode = self.generate_qr_code(self.parent.config['qr_code_link_to_site'])
+            qrcode = self.generate_qr_code(
+                self.parent.config['qr_code_link_to_site'])
             width, height = qrcode.size
             # Canvas to display taken pictures.
             self.qrcanvas = tk.Canvas(left_frame, width=width, height=height)
             self.qrimage = ImageTk.PhotoImage(qrcode)
-            self.qrimagesprite = self.qrcanvas.create_image(165, 165, image=self.qrimage)
+            self.qrimagesprite = self.qrcanvas.create_image(
+                165, 165, image=self.qrimage)
             self.qrcanvas.pack()
 
     def start_triggered(self):

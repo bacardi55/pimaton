@@ -14,5 +14,6 @@ class PimatonCamExceptions(PimatonExceptions):
 class PimatonPrintExceptions(PimatonExceptions):
     pass
 
+
 class PimatonSyncExceptions(PimatonExceptions):
     pass

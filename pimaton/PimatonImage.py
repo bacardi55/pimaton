@@ -24,13 +24,18 @@ class PimatonImage(with_metaclass(Singleton, object)):
         self.config = config
         self.dimensions = self.__calculate_dimensions(config)
 
-    def render_image_to_print(self, taken_pictures, filename, config, qrcode=False):
+    def render_image_to_print(
+            self,
+            taken_pictures,
+            filename,
+            config,
+            qrcode=False):
         """
         This method create the final image to be printed.
         """
 
         logger.debug('Generating image to be printed: %s/%s' %
-                    (config['print_pic']['output_dir'], filename))
+                     (config['print_pic']['output_dir'], filename))
         logger.debug('Taken Pictures: %s' % taken_pictures)
 
         thumbnails = []
@@ -60,7 +65,7 @@ class PimatonImage(with_metaclass(Singleton, object)):
             generated.paste(thumbnail, positions)
 
         if qrcode is not False:
-            positions = self.__get_positions(idx+1, config, self.dimensions)
+            positions = self.__get_positions(idx + 1, config, self.dimensions)
             generated.paste(qrcode, positions)
 
         generated.save(
@@ -131,11 +136,14 @@ class PimatonImage(with_metaclass(Singleton, object)):
         generated = self.__create_new_image(
             self.dimensions['print_pic_size'])
 
-        for idx in range(config['print_pic']['rows'] * config['print_pic']['cols']):
+        for idx in range(
+                config['print_pic']['rows'] *
+                config['print_pic']['cols']):
             positions = self.__get_positions(idx, config, self.dimensions)
             tmp = ImageDraw.Draw(generated)
             tmp.rectangle([positions, (positions[0] +
-                                        config['thumbnails']['width'], positions[1] +
-                                        config['thumbnails']['height'])], outline="black")
-        generated.save('pimaton_template.jpg' , 'JPEG')
-        logger.info('Template file has been generated here: ./pimaton_template.jpg')
+                                       config['thumbnails']['width'], positions[1] +
+                                       config['thumbnails']['height'])], outline="black")
+        generated.save('pimaton_template.jpg', 'JPEG')
+        logger.info(
+            'Template file has been generated here: ./pimaton_template.jpg')

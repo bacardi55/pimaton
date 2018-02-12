@@ -17,8 +17,9 @@ class PimatonTUI(PimatonUI, object):
             if self.pimaton.is_single_loop() is False and self.is_triggered() is False:
                 continue
 
-            if self.pimaton.is_single_loop() :
-                logger.info('*** Pimaton TUI *** Single Loop is True, not waiting for trigger!')
+            if self.pimaton.is_single_loop():
+                logger.info(
+                    '*** Pimaton TUI *** Single Loop is True, not waiting for trigger!')
 
             logger.info(
                 '*** Pimaton trigger has been pressed, starting taking pictures!')
@@ -39,7 +40,8 @@ class PimatonTUI(PimatonUI, object):
                 self.pimaton.sync_pictures()
 
             if self.pimaton.is_single_loop():
-                logger.info('*** Pimaton TUI *** Single Loop is True, exiting Pimaton')
+                logger.info(
+                    '*** Pimaton TUI *** Single Loop is True, exiting Pimaton')
                 break
 
             self.pimaton.wait_before_next_iteration()

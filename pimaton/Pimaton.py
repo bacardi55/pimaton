@@ -85,7 +85,8 @@ class Pimaton:
             return False
 
         import qrcode
-        link = self.config['image']['print_pic']['qr_code_session_link'].replace('%%uuid%%', unique_key)
+        link = self.config['image']['print_pic']['qr_code_session_link'].replace(
+            '%%uuid%%', unique_key)
         logger.debug(link)
         qr = qrcode.QRCode(
             version=self.config['image']['print_pic']['qr_code_size'],
@@ -115,7 +116,11 @@ class Pimaton:
         logger.info('*** Pimaton *** Starting uploading image')
         with open(os.devnull, 'w') as FNULL:
             try:
-                subprocess.call(["rsync", "-azP", self.config['sync']['source'], self.config['sync']['destination']], stdout=FNULL)
+                subprocess.call(["rsync",
+                                 "-azP",
+                                 self.config['sync']['source'],
+                                 self.config['sync']['destination']],
+                                stdout=FNULL)
             except Exception as e:
                 raise PimatonSyncExceptions('Couldnt sync pictures: %s' % e)
 
@@ -130,7 +135,8 @@ class Pimaton:
         Class method to set the configuration of the application
         """
         if config_file is None:
-            config_file = os.path.dirname(os.path.realpath(__file__)) + '/assets/default_config.yaml'
+            config_file = os.path.dirname(
+                os.path.realpath(__file__)) + '/assets/default_config.yaml'
             logger.debug(
                 'No given config, loading default one %s' %
                 config_file)
