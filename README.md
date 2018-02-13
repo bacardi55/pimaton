@@ -169,7 +169,7 @@ The next planned item are:
 - ~~[v0.0.1 - core feature](docs/roadmap.md):~~
 - ~~[v0.0.2 - print capabilities](docs/roadmap.md):~~
 - ~~[v0.0.3 - GUI implementation (WIP)](docs/roadmap.md):~~
-- ~~[v0.0.4 - Web](docs/roadmap.md) ~~: Find a [full blog post](https://bacardi55.org/2018/02/13/having-all-pimaton-pictures-available-on-a-webgallery.html) and [an article about it](https://bacardi55.org/pimaton/part5-optional-webgallery.html)
+- ~~[v0.0.4 - Web](docs/roadmap.md):~~ Find a [full blog post](https://bacardi55.org/2018/02/13/having-all-pimaton-pictures-available-on-a-webgallery.html) and [an article about it](https://bacardi55.org/pimaton/part5-optional-webgallery.html)
 - v0.0.5 - Hardware (To be started):
   - Add GPIO input option
   - Camera Flash capability
