@@ -62,6 +62,8 @@ sudo apt install python-pip libjpeg-dev
 pip install -U pip
 # To enable GUI:
 sudo apt install python-tk python-pil.imagetk
+# To enable printer:
+sudo apt install libcups2-dev
 # To enable synchronizing image to a remote server
 sudo apt install rsync
 ```
