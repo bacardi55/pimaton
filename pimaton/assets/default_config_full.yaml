@@ -3,6 +3,8 @@
 picamera:
     # Where to store taken pictures.
     photo_directory: "/home/pi/pimaton_pictures"
+    # Format of the taken picture, png or jpg.
+    picture_format: 'png'
     number_of_pictures_to_take: 5
     time_before_first_picture: 4
     time_between_pictures: 2
@@ -61,7 +63,7 @@ gui:
 # Image options.
 image:
     print_pic:
-        # Format of the generated image.
+        # Format of the generated image, png or jpg.
         image_format: 'png'
         # Prefix for the generated image.
         generated_prefix_name: "pimaton"

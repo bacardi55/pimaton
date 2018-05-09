@@ -43,7 +43,8 @@ class PimatonCam:
 
         for i in range(self.config['number_of_pictures_to_take']):
             filename = self.config['picture_prefix_name'] + "_" + unique_key + \
-                '_' + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ".jpg"
+                '_' + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + "." + \
+                self.config['picture_format']
             taken_pictures.append(filename)
 
             logger.debug('Taking picture %s' % i)
