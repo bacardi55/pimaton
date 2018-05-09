@@ -45,6 +45,8 @@ pimaton:
 # Image options.
 image:
     print_pic:
+        # Format of the generated image.
+        image_format: 'png'
         # Prefix for the generated image.
         generated_prefix_name: "pimaton"
         # Path for the template jpg to use if any. 

@@ -4,7 +4,6 @@ import os
 import yaml
 import datetime
 import logging
-import os
 import subprocess
 
 from PimatonCam import PimatonCam
@@ -59,8 +58,10 @@ class Pimaton:
 
     def get_filename(self, unique_key):
         filename = self.config['image']['print_pic']['generated_prefix_name'] + '_' + \
-            unique_key + '_' + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + ".jpg"
+            unique_key + '_' + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + \
+            '.' + self.config['image']['print_pic']['image_format']
 
+        logger.debug('Generated filename for final image: %s' % filename)
         return filename
 
     def generate_picture(self, taken_pictures, filename, qrcode):
