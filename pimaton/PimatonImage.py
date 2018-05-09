@@ -68,8 +68,11 @@ class PimatonImage(with_metaclass(Singleton, object)):
             positions = self.__get_positions(idx + 1, config, self.dimensions)
             generated.paste(qrcode, positions)
 
-        logger.debug('Using %s as the image format' % config['print_pic']['image_format'])
-        # PILLOW library will manage the format based on the extension in the filename.
+        logger.debug(
+            'Using %s as the image format' %
+            config['print_pic']['image_format'])
+        # PILLOW library will manage the format based on the extension in the
+        # filename.
         generated.save(
             config['print_pic']['output_dir'] +
             '/' +

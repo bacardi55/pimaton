@@ -13,7 +13,7 @@ logger = logging.getLogger("Pimaton")
 
 try:
     import RPi.GPIO as GPIO
-except:
+except BaseException:
     logger.debug('Couldn\'t load GPIO library')
 
 
@@ -33,7 +33,10 @@ class PimatonGUI(PimatonUI, object):
         self.gpio_lock = 1
         if 'GPIO' in self.inputs and 'GPIO' in pimaton.config:
             GPIO.setmode(GPIO.BCM)
-            GPIO.setup(pimaton.config['GPIO']['start_button'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+            GPIO.setup(
+                pimaton.config['GPIO']['start_button'],
+                GPIO.IN,
+                pull_up_down=GPIO.PUD_UP)
             self.gpio_listener(pimaton.config['GPIO']['start_button'])
 
     def init_tk_root(self):

@@ -8,7 +8,7 @@ logger = logging.getLogger("Pimaton")
 
 try:
     import RPi.GPIO as GPIO
-except:
+except BaseException:
     logger.debug('Couldn\'t load RPi.GPIO library')
 
 
@@ -17,9 +17,14 @@ class PimatonTUI(PimatonUI, object):
         super(PimatonTUI, self).__init__(pimaton)
 
         if 'GPIO' in self.pimaton.config['pimaton']['inputs']:
-            logger.debug('GPIO input is enabled - Start button configured on channel %s' % self.pimaton.config['GPIO']['start_button'])
+            logger.debug(
+                'GPIO input is enabled - Start button configured on channel %s' %
+                self.pimaton.config['GPIO']['start_button'])
             GPIO.setmode(GPIO.BCM)
-            GPIO.setup(self.pimaton.config['GPIO']['start_button'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+            GPIO.setup(
+                self.pimaton.config['GPIO']['start_button'],
+                GPIO.IN,
+                pull_up_down=GPIO.PUD_UP)
             self.reset_gpio(self.pimaton.config['GPIO']['start_button'])
 
     def mainloop(self):
@@ -92,7 +97,11 @@ class PimatonTUI(PimatonUI, object):
         logger.debug('GPIO reset callback.')
         self.gpio_triggered = False
         logger.debug('Start listening to event on channel %s' % channel)
-        GPIO.add_event_detect(channel, GPIO.BOTH, callback=self.gpio_button_pressed, bouncetime=200)
+        GPIO.add_event_detect(
+            channel,
+            GPIO.BOTH,
+            callback=self.gpio_button_pressed,
+            bouncetime=200)
 
 
 class PimatonTUIExceptions(PimatonExceptions):
