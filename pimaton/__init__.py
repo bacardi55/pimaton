@@ -1,7 +1,6 @@
 import sys
 import logging
 import argparse
-from time import sleep
 
 
 from .Pimaton import Pimaton
@@ -43,7 +42,7 @@ def main():
             pimaton.generate_template()
             sys.exit(0)
 
-        logger.info('*** Loading UI... ***')
+        logger.info('*** Selecting UI... ***')
         mode = pimaton.get_ui_mode()
         if mode == 'tui':
             logger.info('*** Loading Text UI... ***')
