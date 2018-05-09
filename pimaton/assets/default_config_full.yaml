@@ -39,11 +39,20 @@ pimaton:
     # UI mode, can be tui (Text user interface) or GUI (graphical user interface)
     # For the GUI to work, you need X and a desktop manager.
     # Only tui mode is available for now.
-    ui_mode: 'gui'
+    ui_mode: 'tui'
     inputs:
         - "keyboard" # React on "enter" key.
         - "gui" # Only available when ui_mode us GUI.
-        # - GPIO # Not available yet.
+        - GPIO
+        # Nota: In TUI mode, GPIO will prevent keyboard to work.
+        #       TUI mode can either use GPIO or keyboard, not both
+        #       (yet)
+
+# GPIO configuration. Only used if "GPIO" is selected in the inputs.
+GPIO:
+    # Channel/Pin number for the button.
+    start_button: 25
+    # TODO: flash.
 
 # This section is only used if pimaton[ui_mode] is set to "gui"
 gui:

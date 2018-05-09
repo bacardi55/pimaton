@@ -42,7 +42,7 @@ pimaton:
     ui_mode: 'tui'
     inputs:
         - "keyboard" # React on "enter" key.
-        # - GPIO # Not available yet.
+        # - GPIO # Not available yet. See full example file.
 
 # Image options.
 image:
