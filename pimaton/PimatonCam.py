@@ -95,6 +95,11 @@ class PimatonCam:
             self.picamera.hflip = config['settings']['hflip']
             self.picamera.vflip = config['settings']['vflip']
 
+            if 'zoom_values' in config['settings']:
+                zv = config['settings']['zoom_values']
+                logger.debug('Zoom is specified: %s' % zv)
+                self.picamera.zoom = (zv[0], zv[1], zv[2], zv[3])
+
             self.picamera.annotate_text = ''
             self.picamera.annotate_text_size = config['settings']['annotate_text_size']
         except Exception as e:

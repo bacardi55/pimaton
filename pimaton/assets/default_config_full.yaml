@@ -32,6 +32,10 @@ picamera:
         hflip: True
         vflip: False
         annotate_text_size: 80
+        # Zoom option, more information here:
+        # https://picamera.readthedocs.io/en/release-1.13/api_camera.html?highlight=zoom#picamera.PiCamera.zoom
+        # Example:
+        # zoom_values: [0.25, 0.25, 0.5, 0.5]
 
 # Pimaton global options.
 pimaton:
