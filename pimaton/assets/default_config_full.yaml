@@ -39,7 +39,7 @@ pimaton:
     # UI mode, can be tui (Text user interface) or GUI (graphical user interface)
     # For the GUI to work, you need X and a desktop manager.
     # Only tui mode is available for now.
-    ui_mode: 'tui'
+    ui_mode: 'gui'
     inputs:
         - "keyboard" # React on "enter" key.
         - "gui" # Only available when ui_mode us GUI.
