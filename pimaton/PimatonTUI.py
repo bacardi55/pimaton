@@ -47,7 +47,8 @@ class PimatonTUI(PimatonUI, object):
             to_print = self.pimaton.generate_picture(
                 taken_pictures,
                 filename,
-                qrcode)
+                qrcode,
+                unique_key)
 
             if self.pimaton.is_print_enabled() is True:
                 self.pimaton.print_picture(to_print)

@@ -1,4 +1,5 @@
 from time import sleep, strftime
+import os
 import datetime
 import logging
 
@@ -48,7 +49,7 @@ class PimatonCam:
             taken_pictures.append(filename)
 
             logger.debug('Taking picture %s' % i)
-            self.capture(filename)
+            self.capture(filename, unique_key)
             logger.debug("Photo (" + filename + ") saved: " + filename)
             self.countdown(self.config['time_between_pictures'])
 
@@ -63,12 +64,17 @@ class PimatonCam:
             sleep(1)
         self.picamera.annotate_text = ''
 
-    def capture(self, filename):
-        logger.debug("Capturing picture %s in %s" %
-                     (filename, self.config['photo_directory']))
+    def capture(self, filename, unique_key):
+        logger.debug(
+            "Capturing picture %s in %s" %
+            (filename,
+             self.config['photo_directory'].replace(
+                 '%%uuid%%',
+                 unique_key)))
         try:
             self.picamera.capture(
-                self.config['photo_directory'] + '/' + filename)
+                self.config['photo_directory'].replace(
+                    '%%uuid%%', unique_key) + '/' + filename)
         except Exception as e:
             raise PimatonCamExceptions(
                 'An error occured capturing the picture: %s' % e)

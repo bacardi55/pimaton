@@ -42,6 +42,13 @@ class Pimaton:
 
     def take_pictures(self, unique_key):
         logger.info('*** Pimaton *** Starting taking pictures')
+
+        # In case the uuid is in the directory path, we need to create it on
+        # the fly.
+        self.check_directory(
+            self.config['picamera']['photo_directory'].replace(
+                '%%uuid%%', unique_key))
+
         try:
             taken_pictures = self.pimatoncam.take_pictures(unique_key)
         except PimatonCamExceptions as e:
@@ -54,6 +61,7 @@ class Pimaton:
             raise PimatonExceptions(
                 'The number of taken pictures isnt right.')
 
+        logger.debug('Pimaton - Take Pictures %s' % taken_pictures)
         return taken_pictures
 
     def get_filename(self, unique_key):
@@ -64,16 +72,26 @@ class Pimaton:
         logger.debug('Generated filename for final image: %s' % filename)
         return filename
 
-    def generate_picture(self, taken_pictures, filename, qrcode):
+    def generate_picture(self, taken_pictures, filename, qrcode, unique_key):
         logger.info('*** Pimaton *** Starting image generation')
+
+        # In case the uuid is in the directory path, we need to create it on
+        # the fly.
+        self.check_directory(
+            self.config['image']['print_pic']['output_dir'].replace(
+                '%%uuid%%', unique_key))
+
         try:
             self.pimatonimage.render_image_to_print(
-                self.__get_fullpath_thumbnails_list(taken_pictures),
+                self.__get_fullpath_thumbnails_list(
+                    taken_pictures,
+                    unique_key),
                 filename,
                 self.config['image'],
-                qrcode)
-            to_print = self.config['image']['print_pic']['output_dir'] + \
-                '/' + filename
+                qrcode,
+                unique_key)
+            to_print = self.config['image']['print_pic']['output_dir'].replace(
+                '%%uuid%%', unique_key) + '/' + filename
             return to_print
 
         except PimatonExceptions as e:
@@ -155,11 +173,14 @@ class Pimaton:
         logger.debug("Loaded configuration: %s" % data)
         return data
 
-    def __get_fullpath_thumbnails_list(self, taken_pictures):
+    def __get_fullpath_thumbnails_list(self, taken_pictures, unique_key):
         fpp = []
         for pic in taken_pictures:
-            fpp.append(self.config['picamera']['photo_directory'] + '/' + pic)
+            fpp.append(
+                self.config['picamera']['photo_directory'].replace(
+                    '%%uuid%%', unique_key) + '/' + pic)
 
+        logger.debug('full path pictures %s' % fpp)
         return fpp
 
     def get_ui_mode(self):
@@ -179,3 +200,16 @@ class Pimaton:
 
     def is_qr_code_enabled(self):
         return self.config['pimaton']['qr_code_link_to_site']
+
+    def check_directory(self, directory):
+        logger.debug('Checking if %s exists' % directory)
+        if not os.path.exists(directory):
+            logger.debug(
+                'Directory %s does not exist, creating it.' %
+                directory)
+            try:
+                os.makedirs(directory)
+            except OSError as e:
+                raise PimatonExceptions(
+                    'Couldn\'t create directory %s, error: %s' %
+                    (directory, e))

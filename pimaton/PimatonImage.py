@@ -29,7 +29,8 @@ class PimatonImage(with_metaclass(Singleton, object)):
             taken_pictures,
             filename,
             config,
-            qrcode=False):
+            qrcode=False,
+            unique_key=None):
         """
         This method create the final image to be printed.
         """
@@ -74,7 +75,7 @@ class PimatonImage(with_metaclass(Singleton, object)):
         # PILLOW library will manage the format based on the extension in the
         # filename.
         generated.save(
-            config['print_pic']['output_dir'] +
+            config['print_pic']['output_dir'].replace('%%uuid%%', unique_key) +
             '/' +
             filename)
         logger.info('*** Pimaton Image *** Final picture has been generated')

@@ -2,6 +2,11 @@
 # PiCamera options.
 picamera:
     # Where to store taken pictures.
+    # Directory where are stored the generated pictures.
+    # You can use %%uuid%% if you want each Pimaton run
+    # To be saved in dedicated directories.
+    # Example:
+    # photo_directory: "/home/pi/pimaton_pictures/%%uuid%%"
     photo_directory: "/home/pi/pimaton_pictures"
     # Format of the taken picture, png or jpg.
     picture_format: 'png'
@@ -84,6 +89,10 @@ image:
         # Put empty string if no template.
         template: None
         # Directory where are stored the generated pictures.
+        # You can use %%uuid%% if you want each Pimaton run
+        # To be saved in dedicated directories.
+        # Example:
+        # output_dir: "/home/pi/pimaton_pictures/%%uuid%%"
         output_dir: "/home/pi/pimaton_pictures"
         # Width and Height of the generated image.
         width: 1241
@@ -94,6 +103,7 @@ image:
         # If a QR code direct to the session gallery should be printed.
         qr_code_enabled: true
         # The link to the gallery. %%uuid%% will be modified with the unique identifier.
+        # qr_code_session_link: "https://mygalleryurl/images/%%uuid%%"
         qr_code_session_link: "https://github.com/bacardi55/pimaton"
         # Change the size of the QR code. Be carreful with this option.
         # Change only if you have changed the number of taken picture or if you
