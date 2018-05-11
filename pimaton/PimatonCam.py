@@ -1,14 +1,13 @@
-from time import sleep, strftime
-import os
+from time import sleep
 import datetime
 import logging
+import socket
 
 logging.basicConfig()
 logger = logging.getLogger("Pimaton")
 
 try:
     from picamera import PiCamera
-    import RPi.GPIO as GPIO
     lib_exists = True
 except Exception as e:
     logger.debug('error loading PiCamera: %s' % e)
@@ -44,7 +43,8 @@ class PimatonCam:
         self.countdown(self.config['time_before_first_picture'])
 
         for i in range(self.config['number_of_pictures_to_take']):
-            filename = self.config['picture_prefix_name'] + "_" + unique_key + \
+            filename = self.config['picture_prefix_name'].replace(
+                '%%hostname%%', socket.gethostname()) + "_" + unique_key + \
                 '_' + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + "." + \
                 self.config['picture_format']
             taken_pictures.append(filename)

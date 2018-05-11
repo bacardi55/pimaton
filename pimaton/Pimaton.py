@@ -5,6 +5,7 @@ import yaml
 import datetime
 import logging
 import subprocess
+import socket
 
 from PimatonCam import PimatonCam
 from PimatonImage import PimatonImage
@@ -79,8 +80,9 @@ class Pimaton:
         return taken_pictures
 
     def get_filename(self, unique_key):
-        filename = self.config['image']['print_pic']['generated_prefix_name'] + '_' + \
-            unique_key + '_' + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + \
+        filename = self.config['image']['print_pic']['generated_prefix_name'].replace(
+            '%%hostname%%', socket.gethostname()) + '_' + unique_key + \
+            '_' + datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + \
             '.' + self.config['image']['print_pic']['image_format']
 
         logger.debug('Generated filename for final image: %s' % filename)
@@ -229,7 +231,8 @@ class Pimaton:
                     (directory, e))
 
     def is_flash_enabled(self):
-        if 'flash_enabled' in self.config['picamera'] and self.config['picamera']['flash_enabled'] is True and 'GPIO' in self.config and 'leds' in self.config['GPIO']:
+        if 'flash_enabled' in self.config['picamera'] and self.config['picamera'][
+                'flash_enabled'] is True and 'GPIO' in self.config and 'leds' in self.config['GPIO']:
             return True
 
     def toggle_flash(self, toggle=False):
