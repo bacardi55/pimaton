@@ -8,6 +8,7 @@ logger = logging.getLogger("Pimaton")
 
 try:
     from picamera import PiCamera
+    import RPi.GPIO as GPIO
     lib_exists = True
 except Exception as e:
     logger.debug('error loading PiCamera: %s' % e)

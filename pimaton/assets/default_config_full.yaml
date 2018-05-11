@@ -41,6 +41,7 @@ picamera:
         # https://picamera.readthedocs.io/en/release-1.13/api_camera.html?highlight=zoom#picamera.PiCamera.zoom
         # Example:
         # zoom_values: [0.25, 0.25, 0.5, 0.5]
+    flash_enabled: true
 
 # Pimaton global options.
 pimaton:
@@ -62,6 +63,8 @@ GPIO:
     # Channel/Pin number for the button.
     start_button: 25
     # TODO: flash.
+    leds:
+        - 21
 
 # This section is only used if pimaton[ui_mode] is set to "gui"
 gui:

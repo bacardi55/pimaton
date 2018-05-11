@@ -14,6 +14,11 @@ from PimatonExceptions import PimatonExceptions, PimatonCamExceptions, PimatonPr
 logging.basicConfig()
 logger = logging.getLogger("Pimaton")
 
+try:
+    import RPi.GPIO as GPIO
+except BaseException:
+    logger.debug('Couldn\'t load RPi.GPIO library')
+
 
 class Pimaton:
     """
@@ -25,6 +30,13 @@ class Pimaton:
         self.set_config(config_file)
 
         # Init classes now so it checks the config early.
+        if self.is_flash_enabled() is True:
+            logger.debug('Flash option is enabled.')
+            GPIO.setmode(GPIO.BCM)
+            GPIO.setwarnings(False)
+            for led in self.config['GPIO']['leds']:
+                logger.debug('Enable Flash on GPIO %s' % led)
+                GPIO.setup(led, GPIO.OUT)
         self.pimatoncam = PimatonCam(self.config['picamera'])
         self.pimatonimage = PimatonImage(self.config['image'])
 
@@ -50,7 +62,9 @@ class Pimaton:
                 '%%uuid%%', unique_key))
 
         try:
+            self.toggle_flash(True)
             taken_pictures = self.pimatoncam.take_pictures(unique_key)
+            self.toggle_flash(False)
         except PimatonCamExceptions as e:
             logger.error('An error occured when taking pictures: %s' % e)
             raise PimatonExceptions("An error occured when taking picture")
@@ -213,3 +227,13 @@ class Pimaton:
                 raise PimatonExceptions(
                     'Couldn\'t create directory %s, error: %s' %
                     (directory, e))
+
+    def is_flash_enabled(self):
+        if 'flash_enabled' in self.config['picamera'] and self.config['picamera']['flash_enabled'] is True and 'GPIO' in self.config and 'leds' in self.config['GPIO']:
+            return True
+
+    def toggle_flash(self, toggle=False):
+        if self.is_flash_enabled() is True:
+            action = GPIO.HIGH if toggle is True else GPIO.LOW
+            for led in self.config['GPIO']['leds']:
+                GPIO.output(led, action)
