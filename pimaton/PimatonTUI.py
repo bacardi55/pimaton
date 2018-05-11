@@ -21,6 +21,7 @@ class PimatonTUI(PimatonUI, object):
                 'GPIO input is enabled - Start button configured on channel %s' %
                 self.pimaton.config['GPIO']['start_button'])
             GPIO.setmode(GPIO.BCM)
+            GPIO.setwarnings(False)
             GPIO.setup(
                 self.pimaton.config['GPIO']['start_button'],
                 GPIO.IN,
